@@ -28,7 +28,7 @@ const OutgoingsPage: React.FC<any> = ({ currentUser }) => {
   useEffect(() => {
     console.log(currentUser)
     getUserRecords(currentUser.email)
-  }, [userOutgoings])
+  }, [])
 
 
 
@@ -47,7 +47,7 @@ const OutgoingsPage: React.FC<any> = ({ currentUser }) => {
                   <TableHead />
                   <tbody className="divide-y divide-gray-200 font-medium">
                     {userOutgoings && userOutgoings.map((outgoing, index) => {
-                      return (<TableRow key={index} outgoing={outgoing} currentUser={currentUser} />)
+                      return (<TableRow key={index} outgoing={outgoing} currentUser={currentUser} getUserRecords={getUserRecords} />)
                     })}
 
 

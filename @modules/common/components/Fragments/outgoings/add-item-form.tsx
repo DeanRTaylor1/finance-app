@@ -23,7 +23,8 @@ const AddItemForm: React.FC<any> = ({ currentUser, activateModalHandler, getUser
     url: `${process.env.NEXT_PUBLIC_API_URL}api/finances/outgoings`,
     method: 'post',
     body: { email: currentUser.email, item: itemName, tag, cost, currency },
-    onSuccess: () => Router.push('/outgoings'),
+    onSuccess: () => getUserRecords(currentUser.email)
+    ,
   });
 
 
@@ -48,7 +49,6 @@ const AddItemForm: React.FC<any> = ({ currentUser, activateModalHandler, getUser
     setTag('');
     setCost('');
     setCurrency('');
-    getUserRecords(currentUser.email);
     activateModalHandler();
 
   };

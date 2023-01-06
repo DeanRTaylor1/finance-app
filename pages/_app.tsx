@@ -7,6 +7,7 @@ import BuildClient from './api/build-client';
 import { currentUserProps } from '@modules/common/types/types-interfaces';
 import axios from 'axios';
 import { CurrentUserContext, CurrentUserContextProvider } from '@modules/common/hooks/current-user-context';
+import { NextPageContext } from 'next';
 
 interface CustomProps extends AppProps {
   currentUser?: currentUserProps;
@@ -34,7 +35,7 @@ export default function App({
   );
 }
 
-App.getInitialProps = async (appContext: any) => {
+ App.getInitialProps = async (appContext: any) => {
 
   const { data } = await axios.get(
     `${process.env.NEXT_PUBLIC_API_URL}api/users/currentuser`,
@@ -51,3 +52,6 @@ App.getInitialProps = async (appContext: any) => {
 
   return { pageProps, ...data };
 };
+
+
+

@@ -5,6 +5,7 @@ import { CircleLoader } from 'react-spinners';
 import axios from 'axios';
 import { toNormalCase } from '@modules/common/utils/utility-functions';
 import Link from 'next/link';
+import { numberWithCommas } from '@modules/common/utils/number-with-comma';
 
 //type userStateData = Omit<userProfileData, 'id' | 'createdAt'>
 type userDataItem = {
@@ -53,7 +54,7 @@ const ProfilePage: React.FC<any> = ({ currentUser }) => {
           .map((item, index) => {
             return (
               <div key={index} className='p-2 border-b border-dashed border-slate-200 flex flex-col gap-2'>
-                {item.name}: <div className='font-extralight text-lg'>{item.value} </div>
+                {item.name}: <div className='font-extralight text-lg'>{(isNaN(+item.value) || item.name ===  'Phone') ? item.value: numberWithCommas(+item.value) } </div>
               </div>)
           })}
         {userData && <Link href='/user/profile/update'> <button className='signInButton'>Update Details</button> </Link>}

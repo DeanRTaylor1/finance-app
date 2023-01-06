@@ -13,6 +13,6 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
       console.log(err);
     }
   }
-};
+}slate-100;
 
 export default handler;

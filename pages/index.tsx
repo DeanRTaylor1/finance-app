@@ -22,6 +22,6 @@ export default function Home({ currentUser }: any) {
 }
 
 Home.getInitialProps = async (context: any, client: any, currentUser: any) => {
-   console.log(context)
+   
    return currentUser;
-};
+}; 

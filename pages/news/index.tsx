@@ -20,7 +20,7 @@ export default function News({ currentUser }: any) {
   }, []);
   return (
     <Fragment>
-      <div className='h-full flex flex-col justify-start items-center p-12 gap-4'>
+      <div className='max-w-[calc(900px)] w-[90vw] h-full flex flex-col justify-start items-center p-12 gap-4'>
         <h1 className='h-16 font-extrabold text-lg '>News </h1>
         <div className='flex flex-col md:flex-row md:gap-8 md:flex-wrap md:justify-center items-center w-11/12 gap-4'>
           {isLoading && (

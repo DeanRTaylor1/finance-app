@@ -6,7 +6,7 @@ import { CurrentUserContext } from '@modules/common/hooks/current-user-context';
 const BaseLayout: React.FC<CustomPropsWithChildren> = (props) => {
   const userCtx = useContext(CurrentUserContext)
 
- 
+
   return (
     <div className='p-4 flex flex-col justify-between items-center min-h-screen h-fit bg-gray-100'>
       <Navbar currentUser={props.currentUser} />
@@ -17,3 +17,12 @@ const BaseLayout: React.FC<CustomPropsWithChildren> = (props) => {
 };
 
 export default BaseLayout;
+
+
+export async function getInitialProps(
+  context: any,
+  client: any,
+  currentUser: any
+){
+  return currentUser;
+}
