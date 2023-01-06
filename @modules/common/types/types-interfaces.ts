@@ -74,8 +74,57 @@ type currentUserProps = {
   exp: number;
 };
 
+type userProfileData = {
+    id:            number;
+    createdAt:     Date;
+    updatedAt:     Date;
+    email:         string;
+    monthlySalary: number;
+    username:      string;
+    currency:      string;
+    phone:         string;
+}
+
+export const color = {
+  blue: '#60a5fa'
+}
+
+type profileState = {
+  monthlySalary: number;
+  currency: string;
+  phone:string;
+  savingsTarget: number;
+
+}
+
+type profileUpdateActionType = {
+  type: string;
+  value: string;
+  key: 'monthlySalary' | 'currency' | 'phone' | 'savingsTarget'
+}
+
+type userDataItem = {
+    name: string; 
+    value: string; 
+    tag: string;
+  }
+
+type userStateData = userDataItem[];
+
+type OutgoingRecord = {
+    id:        number;
+    createdAt: Date;
+    updatedAt: Date;
+    item:      string;
+    currency:  string;
+    userId:    number;
+    tag:       string;
+    cost:      number;
+}
+
 export type {
   MobileNavProps,
+  userProfileData,
   LogoProps,
   inputProps,
   Methods,
@@ -87,4 +136,9 @@ export type {
   ArticleContainerProps,
   Article,
   currentUserProps,
+  profileState,
+  profileUpdateActionType,
+  userDataItem,
+  userStateData,
+  OutgoingRecord
 };

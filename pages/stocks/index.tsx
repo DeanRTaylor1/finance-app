@@ -6,6 +6,8 @@ import SquareContainer from '@modules/common/components/Fragments/Square-Contain
 import PageContainer from '@modules/common/components/Fragments/Page-Container';
 import GetData from '@modules/common/components/Charts/ChartData';
 import StockContainer from '@modules/common/components/Fragments/Stock-Container';
+import { color } from '@modules/common/types/types-interfaces';
+import { saveToLocal } from '@modules/common/utils/save-to-local';
 
 export default function Stocks({ currentUser }: any) {
   const [isLoading, setIsLoading] = useState<Boolean>(true);
@@ -28,23 +30,40 @@ export default function Stocks({ currentUser }: any) {
   // ]
 
   useEffect(() => {
+
     if (!currentUser) {
       Router.push('/auth/signin');
     }
+    let localStocks: any = localStorage.getItem('stocks')
+    setStocks(JSON.parse(localStocks))
+
+    console.log(JSON.parse(localStocks))
     setIsLoading(false);
   }, []);
 
+  const setInitialStocks = (stockCode:string, months:string) => {
+          setStockCode(stockCode) 
+          setMonths
+      }
+
+
   const addStockHandler = () => {
+    console.log(JSON.stringify(stocks))
+    console.log({ code: stockCode, months })
     if (!stocks) {
       setStocks([{ code: stockCode, months }]);
       setStockCode('');
       setMonths(0);
+      window.localStorage.setItem('stocks', JSON.stringify([{ code: stockCode, months }]))
       return;
     }
+    //only storing one stock to limit API calls
     const temp = [...stocks, { code: stockCode, months }];
     setStocks(temp);
     setStockCode('');
     setMonths(0);
+   
+
   };
 
   const deleteStockHandler = (stock: string) => {
@@ -55,55 +74,67 @@ export default function Stocks({ currentUser }: any) {
       return stockObject.code !== stock;
     });
     setStocks(temp);
+    window.localStorage.setItem('stocks',
+      JSON.stringify(temp))
   };
 
-  return (
-    <Fragment>
-      <PageContainer>
-        {isLoading && (
-          <div className='h-full w-full flex justify-center items-center'>
-            <CircleLoader size={100} color='#60a5fa' />
-          </div>
-        )}
-        {stocks &&
-          stocks.map((stock, index) => {
-            return (
-              <StockContainer
-                key={index}
-                code={stock.code}
-                deleteHandler={deleteStockHandler}
-              >
-                <GetData stock={stock.code} months={stock.months} />
-              </StockContainer>
-            );
-          })}
+  if (isLoading) {
+    return (
+      <Fragment>
+        <PageContainer>
+          {isLoading && (
+            <div className='h-full w-full flex justify-center items-center'>
+              <CircleLoader size={100} color={color.blue} />
+            </div>
+          )}
+        </PageContainer>
+      </Fragment>
 
-        {!isLoading && (!stocks || stocks.length < 5) && (
-          <SquareContainer>
-            <Input
-              name={'Stock Code:'}
-              label={'stockcode'}
-              type={'text'}
-              placeholder={'Stock Code'}
-              getInputs={getStockCode}
-              value={stockCode}
-            />
-            <Input
-              name={'Months'}
-              label={'months'}
-              type={'text'}
-              placeholder={'Months of data'}
-              getInputs={getMonths}
-              value={months.toString()}
-            />
-            <button className='signInButton' onClick={addStockHandler}>
-              Add Chart
-            </button>
-          </SquareContainer>
-        )}
-      </PageContainer>
-    </Fragment>
-  );
+    )
+  } else {
+    return (
+      <Fragment>
+        <PageContainer>
+          {stocks &&
+            stocks.map((stock, index) => {
+              return (
+                <StockContainer
+                  key={index}
+                  code={stock.code}
+                  deleteHandler={deleteStockHandler}
+                >
+                  <GetData stock={stock.code} months={stock.months} />
+                </StockContainer>
+              );
+            })}
+
+          {!isLoading && (!stocks || stocks.length < 5) && (
+            <SquareContainer>
+              <Input
+                name={'Stock Code:'}
+                label={'stockcode'}
+                type={'text'}
+                placeholder={'Stock Code'}
+                getInputs={getStockCode}
+                value={stockCode}
+              />
+              <Input
+                name={'Months'}
+                label={'months'}
+                type={'text'}
+                placeholder={'Months of data'}
+                getInputs={getMonths}
+                value={months.toString()}
+              />
+              <button className='signInButton' onClick={addStockHandler}>
+                Add Chart
+              </button>
+            </SquareContainer>
+          )}
+        </PageContainer>
+      </Fragment>
+    );
+  }
 }
 
 Stocks.getInitialProps = async (

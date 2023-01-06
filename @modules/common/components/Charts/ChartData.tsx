@@ -2,8 +2,8 @@ import { Fragment, useEffect, useState } from 'react';
 import { CircleLoader } from 'react-spinners';
 
 import Router from 'next/router';
-import SquareContainer from '../../Components/Fragments/Square-Container';
-import PageContainer from '../../Components/Fragments/Page-Container';
+import SquareContainer from '../Fragments/Square-Container';
+import PageContainer from '../Fragments/Page-Container';
 import axios, { AxiosResponse } from 'axios';
 
 //chart
@@ -19,7 +19,8 @@ import {
   Legend,
 } from 'chart.js';
 import { Line } from 'react-chartjs-2';
-import LineChart from '../../Components/Charts/Line-Chart';
+import LineChart from './Line-Chart';
+import { color } from '@modules/common/types/types-interfaces';
 
 ChartJS.register(
   CategoryScale,
@@ -67,7 +68,7 @@ export default function ChartData({ stock, months }: any) {
     <Fragment>
       {isLoading && (
         <div className='h-full w-full flex justify-center items-center'>
-          <CircleLoader size={100} color='#60a5fa' />
+          <CircleLoader size={100} color={color.blue} />
         </div>
       )}
       {!isLoading && (

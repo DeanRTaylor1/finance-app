@@ -2,7 +2,7 @@ import axios from 'axios';
 import { Fragment, useEffect, useState } from 'react';
 import { CircleLoader } from 'react-spinners';
 import { ArrowTopRightOnSquareIcon } from '@heroicons/react/24/solid';
-import { Article } from '@modules/common/types/types-interfaces';
+import { Article, color } from '@modules/common/types/types-interfaces';
 import ArticleContainer from '@modules/common/components/Fragments/Article-Container';
 import Newsstripes from '@modules/common/components/Fragments/New-Stripes';
 import Stripes from '@modules/common/components/Fragments/Stripes';
@@ -25,7 +25,7 @@ export default function News({ currentUser }: any) {
         <div className='flex flex-col md:flex-row md:gap-8 md:flex-wrap md:justify-center items-center w-11/12 gap-4'>
           {isLoading && (
             <div className='h-full w-full flex justify-center items-center'>
-              <CircleLoader size={100} color='#60a5fa' />
+              <CircleLoader size={100} color={color.blue} />
             </div>
           )}
           {articles && <Stripes />}

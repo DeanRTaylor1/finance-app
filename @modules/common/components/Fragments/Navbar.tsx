@@ -3,11 +3,33 @@ import { Bars3Icon, UserCircleIcon } from '@heroicons/react/24/solid';
 import Logo from './Logo';
 import Mobilenav from './Mobile-Nav';
 import uniqid from 'uniqid';
-import { useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { CustomPropsWithChildren } from '@modules/common/types/types-interfaces';
 import ProfileMenu from './profile-menu';
+import { CurrentUserContext } from '@modules/common/hooks/current-user-context';
+import getCurrentUserFunction from '@modules/common/hooks/get-current-user';
 
 const Navbar: React.FC<CustomPropsWithChildren> = ({ currentUser }) => {
+
+  const userCtx = useContext(CurrentUserContext)
+
+  const addCurrentUserToContext = async () => {
+    try {
+      let user = await getCurrentUserFunction();
+      console.log(user.currentUser)
+      userCtx.updateUser(user.currentUser)
+
+    } catch (err) {
+      console.log(err)
+    }
+
+  }
+
+  useEffect(() => {
+    addCurrentUserToContext();
+  }, [])
+
+
   const [scale, setScale] = useState('scale-0');
   const [profileScale, setProfileScale] = useState<string>('scale-0');
   const authItems = [
@@ -31,7 +53,9 @@ const Navbar: React.FC<CustomPropsWithChildren> = ({ currentUser }) => {
     });
 
   const navItems = [
-    { label: 'Finances', href: '/finances' },
+    { label: 'Regular Outgoings', href: '/outgoings' },
+    { label: 'Daily expenses', href: '/daily' },
+    { label: 'Savings', href: '/savings' },
     { label: 'Stocks', href: '/stocks' },
     { label: 'News', href: '/news' },
   ]
@@ -83,7 +107,7 @@ const Navbar: React.FC<CustomPropsWithChildren> = ({ currentUser }) => {
   const mobileNavHandler = (event: any, source?: string) => {
     //this condition closes the navbar if the users clicks one of the buttons/links
     if (source === 'button' && scale === 'scale-100') {
-      return setProfileScale('scale-0');
+      return setScale('scale-0');
     }
     scale === 'scale-0' ? setScale('scale-100') : setScale('scale-0');
   };
@@ -91,7 +115,7 @@ const Navbar: React.FC<CustomPropsWithChildren> = ({ currentUser }) => {
   return (
     <div className='navbar'>
       <Logo />
-      <ul className='hidden md:flex gap-8 '>{navItems}</ul>
+      <ul className='hidden md:flex justify-around items-center  w-[calc(750px)] pr-12 '>{navItems}</ul>
       {/*<ul className='hidden md:flex  gap-2'>{authItems}</ul>*/}
       <UserCircleIcon
         className='h-12 w-10 hidden md:flex hover:cursor-pointer'
