@@ -9,7 +9,7 @@ const Signin: React.FC<PropsWithAuth> = ({ currentUser }) => {
   const [isLoading, setIsLoading] = useState<Boolean>(true);
   useEffect(() => {
     if (currentUser) {
-      Router.push('/');
+      Router.back();
     }
     if (!currentUser) {
       setIsLoading(false);

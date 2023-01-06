@@ -22,20 +22,20 @@ export default function App({
 
 
   return (
-    <CurrentUserContextProvider>
-      <BaseLayout currentUser={currentUser}>
+
+    <BaseLayout currentUser={currentUser}>
       <Head>
         <title>My Finance</title>
       </Head>
       <Component {...pageProps} currentUser={currentUser} />
     </BaseLayout>
-    </CurrentUserContextProvider>
-    
+
+
   );
 }
 
 App.getInitialProps = async (appContext: any) => {
-  
+
   const { data } = await axios.get(
     `${process.env.NEXT_PUBLIC_API_URL}api/users/currentuser`,
     { withCredentials: true }

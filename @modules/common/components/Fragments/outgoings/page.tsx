@@ -3,9 +3,18 @@ import { useEffect, useState } from "react";
 import { currentUserProps, OutgoingRecord } from '@modules/common/types/types-interfaces'
 import TableHead from "./table-head";
 import TableRow from "./table-row";
+import Input from "../../Form/Input";
+import Formerrors from "../../Form/Form-Errors";
+import AddItemForm from "./add-item-form";
 const OutgoingsPage: React.FC<any> = ({ currentUser }) => {
 
   const [userOutgoings, setUserOutgoings] = useState<OutgoingRecord[]>([{} as OutgoingRecord])
+  const [modalActive, setModalActive] = useState<Boolean>(false)
+
+  const activateModalHandler = () => {
+    modalActive ? setModalActive(false) : setModalActive(true)
+  }
+
 
   const getUserRecords = async (email: string) => {
 
@@ -19,32 +28,39 @@ const OutgoingsPage: React.FC<any> = ({ currentUser }) => {
   useEffect(() => {
     console.log(currentUser)
     getUserRecords(currentUser.email)
-  }, [])
-
-  return (<div className='w-[90vw] h-[calc(85vh)] flex mt-14 items-start justify-center z-10 max-w-[calc(900px)]'>
-    <div className='h-[95%] w-[95%] flex flex-col gap-4 pt-8 bg-white  rounded-md px-8 py-4 text-xl font-bold'>
-      Monthly Outgoings:
-      <div className="flex flex-col">
-        <div className="overflow-x-auto">
-          <div className="p-1.5 w-full inline-block align-middle">
-            <div className="overflow-x-hidden md:overflow-hidden border rounded-lg">
-              <table className="min-w-full divide-y divide-gray-200">
-              <TableHead />
-                <tbody className="divide-y divide-gray-200 font-medium">
-                 {userOutgoings && userOutgoings.map((outgoing, index) => {
-                     return (<TableRow key={index} outgoing={outgoing} currentUser={currentUser} />)
-                   })}                  
+  }, [userOutgoings])
 
 
-                </tbody>
 
-              </table>
+  return (
+    <div className='w-[90vw] h-[calc(85vh)] flex mt-14 items-start justify-center z-10 max-w-[calc(900px)]'>
+      <div className='h-[95%] w-[95%] flex flex-col gap-4 pt-8 bg-white  rounded-md px-8 py-4 text-xl font-bold'>
+        <span className="flex justify-between items-center"><h1>
+          Monthly Outgoings:
+        </h1>
+          <button className="navButton w-36" onClick={activateModalHandler}>Add Item</button>
+        </span>        <div className="flex flex-col">
+          <div className="overflow-x-auto">
+            <div className="p-1.5 w-full inline-block align-middle">
+              <div className="overflow-x-hidden md:overflow-hidden border rounded-lg">
+                <table className="min-w-full divide-y divide-gray-200">
+                  <TableHead />
+                  <tbody className="divide-y divide-gray-200 font-medium">
+                    {userOutgoings && userOutgoings.map((outgoing, index) => {
+                      return (<TableRow key={index} outgoing={outgoing} currentUser={currentUser} />)
+                    })}
+
+
+                  </tbody>
+
+                </table>
+              </div>
             </div>
           </div>
         </div>
+        {modalActive && <AddItemForm getUserRecords={getUserRecords} currentUser={currentUser} activateModalHandler={activateModalHandler} />}
       </div>
-    </div>
-  </div>)
+    </div>)
 }
 
 

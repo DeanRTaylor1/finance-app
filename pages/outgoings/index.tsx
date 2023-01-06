@@ -16,7 +16,7 @@ function Outgoings({ currentUser }: any) {
         { withCredentials: true }
       );
       console.log(data.currentUser)
-      setUserState(data.currentUser)
+      currentUser(data.currentUser)
       setIsLoading(false)
     } catch (err) {
       console.log(err)
@@ -37,7 +37,7 @@ function Outgoings({ currentUser }: any) {
   return (
     <Fragment>
       {isLoading && <div className='h-full w-full flex justify-center items-center'> <CircleLoader size={100} color={color.blue} /> </div>}
-      {!isLoading && <OutgoingsPage currentUser={userState} />}
+      {!isLoading && <OutgoingsPage currentUser={currentUser} />}
     </Fragment>
   )
 }

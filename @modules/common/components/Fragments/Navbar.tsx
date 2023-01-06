@@ -3,32 +3,14 @@ import { Bars3Icon, UserCircleIcon } from '@heroicons/react/24/solid';
 import Logo from './Logo';
 import Mobilenav from './Mobile-Nav';
 import uniqid from 'uniqid';
-import { useContext, useEffect, useState } from 'react';
+import { useContext, useState } from 'react';
 import { CustomPropsWithChildren } from '@modules/common/types/types-interfaces';
 import ProfileMenu from './profile-menu';
 import { CurrentUserContext } from '@modules/common/hooks/current-user-context';
-import getCurrentUserFunction from '@modules/common/hooks/get-current-user';
 
 const Navbar: React.FC<CustomPropsWithChildren> = ({ currentUser }) => {
 
   const userCtx = useContext(CurrentUserContext)
-
-  const addCurrentUserToContext = async () => {
-    try {
-      let user = await getCurrentUserFunction();
-      console.log(user.currentUser)
-      userCtx.updateUser(user.currentUser)
-
-    } catch (err) {
-      console.log(err)
-    }
-
-  }
-
-  useEffect(() => {
-    addCurrentUserToContext();
-  }, [])
-
 
   const [scale, setScale] = useState('scale-0');
   const [profileScale, setProfileScale] = useState<string>('scale-0');

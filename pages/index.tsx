@@ -6,22 +6,10 @@ import { CircleLoader } from 'react-spinners';
 
 export default function Home({ currentUser }: any) {
   const [isLoading, setIsLoading] = useState<Boolean>(true)
-  const userCtx = useContext(CurrentUserContext)
-
-  const addCurrentUserToContext = async () => {
-    try {
-      let user = await getCurrentUserFunction();
-      console.log(user.currentUser)
-      userCtx.updateUser(user.currentUser)
-      setIsLoading(false)
-    } catch (err) {
-      console.log(err)
-    }
-
-  }
-
+ 
   useEffect(() => {
-    addCurrentUserToContext();
+    console.log(currentUser)
+    setIsLoading(false);
   }, [])
 
 
@@ -34,7 +22,6 @@ export default function Home({ currentUser }: any) {
 }
 
 Home.getInitialProps = async (context: any, client: any, currentUser: any) => {
-  console.log(currentUser)
-
-  return currentUser;
+   console.log(context)
+   return currentUser;
 };
