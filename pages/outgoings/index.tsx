@@ -5,30 +5,17 @@ import Router from 'next/router';
 import { Fragment, useEffect, useState } from 'react';
 import { CircleLoader } from 'react-spinners';
 
-function Outgoings({ currentUser }: any) {
+function Outgoings( currentUser: any) {
   const [isLoading, setIsLoading] = useState<Boolean>(true)
   const [userState, setUserState] = useState<any>()
 
-  const checkLoggedIn = async () => {
-    try {
-      const { data } = await axios.get(
-        `${process.env.NEXT_PUBLIC_API_URL}api/users/currentuser`,
-        { withCredentials: true }
-      );
-      console.log(data.currentUser)
-      currentUser(data.currentUser)
-      setIsLoading(false)
-    } catch (err) {
-      console.log(err)
-      Router.push('/auth/signin')
-    }
-  }
+  
 
   useEffect(() => {
     if (!currentUser) {
-      checkLoggedIn();
+     Router.push('/auth/signin')
     } else {
-      setUserState(currentUser)
+      
       setIsLoading(false)
     }
   }, []);

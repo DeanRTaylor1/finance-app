@@ -1,16 +1,12 @@
 import React, { Fragment, PropsWithChildren, useContext, useEffect } from 'react';
 import { CustomPropsWithChildren } from '@modules/common/types/types-interfaces';
 import Navbar from '../Fragments/Navbar';
-import { CurrentUserContext } from '@modules/common/hooks/current-user-context';
 
-const BaseLayout: React.FC<CustomPropsWithChildren> = (props) => {
-  const userCtx = useContext(CurrentUserContext)
-
-
+const BaseLayout: React.FC<CustomPropsWithChildren> = ({currentUser, children}) => {
   return (
     <div className='p-4 flex flex-col justify-between items-center min-h-screen h-fit bg-gray-100'>
-      <Navbar currentUser={props.currentUser} />
-      {props.children}
+      <Navbar currentUser={currentUser} />
+      {children}
       <div>Footer</div>
     </div>
   );
@@ -18,7 +14,7 @@ const BaseLayout: React.FC<CustomPropsWithChildren> = (props) => {
 
 export default BaseLayout;
 
-
+/*
 export async function getInitialProps(
   context: any,
   client: any,
@@ -26,3 +22,4 @@ export async function getInitialProps(
 ){
   return currentUser;
 }
+*/

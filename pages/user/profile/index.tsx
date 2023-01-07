@@ -1,12 +1,12 @@
 
 import ProfilePage from '@modules/common/components/Fragments/profile-page';
-import { color } from '@modules/common/types/types-interfaces';
+import { color, currentUserProps } from '@modules/common/types/types-interfaces';
 import Router from 'next/router';
 import { Fragment, useEffect, useState } from 'react';
 import { CircleLoader } from 'react-spinners';
 
 
-export default function Profile({ currentUser }: any) {
+export default function Profile( currentUser:currentUserProps ) {
   const [isLoading, setIsLoading] = useState<Boolean>(true)
   
 
