@@ -6,7 +6,6 @@ import BaseLayout from '@modules/common/components/Layouts/Base-Layout';
 import BuildClient from './api/build-client';
 import { currentUserProps } from '@modules/common/types/types-interfaces';
 import axios from 'axios';
-import { CurrentUserContext, CurrentUserContextProvider } from '@modules/common/hooks/current-user-context';
 import { NextPageContext } from 'next';
 
 interface CustomProps extends AppProps {
@@ -34,8 +33,27 @@ export default function App({
 
   );
 }
+App.getInitialProps = async (appContext: any) => {
+  const client = BuildClient(appContext.ctx);
+  const { data } = await client.get('/api/users/currentuser');
+  let pageProps = {};
+  if (appContext.Component.getInitialProps) {
+    pageProps = await appContext.Component.getInitialProps(
+      appContext.ctx,
+      client,
+      data.currentUser
+    );
+  }
 
+  return { pageProps, ...data };
+};
+
+
+/*
  App.getInitialProps = async (appContext: any) => {
+
+   console.log(appContext.ctx.req.cookies)
+   
 
   const { data } = await axios.get(
     `${process.env.NEXT_PUBLIC_API_URL}api/users/currentuser`,
@@ -52,6 +70,6 @@ export default function App({
 
   return { pageProps, ...data };
 };
-
+*/
 
 

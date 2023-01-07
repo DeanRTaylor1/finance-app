@@ -1,4 +1,3 @@
-import { CurrentUserContext } from '@modules/common/hooks/current-user-context';
 import getCurrentUserFunction from '@modules/common/hooks/get-current-user';
 import { color } from '@modules/common/types/types-interfaces';
 import { Fragment, useContext, useEffect, useState } from 'react';

@@ -6,11 +6,8 @@ import uniqid from 'uniqid';
 import { useContext, useState } from 'react';
 import { CustomPropsWithChildren } from '@modules/common/types/types-interfaces';
 import ProfileMenu from './profile-menu';
-import { CurrentUserContext } from '@modules/common/hooks/current-user-context';
 
 const Navbar: React.FC<CustomPropsWithChildren> = ({ currentUser }) => {
-
-  const userCtx = useContext(CurrentUserContext)
 
   const [scale, setScale] = useState('scale-0');
   const [profileScale, setProfileScale] = useState<string>('scale-0');

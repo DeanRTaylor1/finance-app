@@ -6,7 +6,7 @@ import TableRow from "./table-row";
 import Input from "../../Form/Input";
 import Formerrors from "../../Form/Form-Errors";
 import AddItemForm from "./add-item-form";
-const OutgoingsPage: React.FC<any> = ({ currentUser }) => {
+const OutgoingsPage: React.FC<any> = ( {currentUser} ) => {
 
   const [userOutgoings, setUserOutgoings] = useState<OutgoingRecord[]>([{} as OutgoingRecord])
   const [modalActive, setModalActive] = useState<Boolean>(false)
@@ -26,8 +26,7 @@ const OutgoingsPage: React.FC<any> = ({ currentUser }) => {
   }
 
   useEffect(() => {
-    console.log(currentUser)
-    getUserRecords(currentUser.email)
+     getUserRecords(currentUser.email)
   }, [])
 
 
