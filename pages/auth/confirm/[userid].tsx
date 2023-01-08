@@ -3,8 +3,8 @@ import Link from 'next/link';
 import Router, { useRouter } from 'next/router';
 import { Fragment, useEffect, useState } from 'react';
 
-import { CircleLoader } from 'react-spinners';
 import DoRequest from '@modules/common/hooks/do-request';
+import LoadingCircle from '@modules/common/components/loadingbar/loading-circle';
 
 const Confirm: React.FC = () => {
   const [isLoading, setIsLoading] = useState<Boolean>(true);
@@ -41,7 +41,7 @@ const Confirm: React.FC = () => {
       )}
       {isLoading && (
         <div className='h-full w-full flex justify-center items-center'>
-          <CircleLoader size={100} color={color.blue}/>
+        <LoadingCircle />
         </div>
       )}
     </Fragment>

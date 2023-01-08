@@ -2,7 +2,6 @@
 import { Fragment, useEffect, useState, useReducer } from 'react';
 import { currentUserProps, profileState, userProfileData, userStateData } from '@modules/common/types/types-interfaces';
 import DoRequest from '@modules/common/hooks/do-request';
-import { CircleLoader } from 'react-spinners';
 import axios from 'axios';
 import { toNormalCase } from '@modules/common/utils/utility-functions';
 import profileReducer from '@modules/common/utils/update-profile-reducer';

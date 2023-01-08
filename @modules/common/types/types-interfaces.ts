@@ -9,10 +9,27 @@ interface MobileNavProps {
     event: React.MouseEvent<SVGSVGElement, MouseEvent>,
     source?: string
   ) => void;
+  mobileProfileHandler: (event: React.MouseEvent<SVGSVGElement, MouseEvent>, source?: string) => void
+
 }
+
+type ProfileMenuProps = {
+  authItems: React.ReactElement[],
+  profileItems: React.ReactElement[],
+  mobileProfileHandler: (event: React.MouseEvent<SVGSVGElement, MouseEvent>, source?: string) => void
+  profileScale: string
+  mobileNavHandler: (
+    event: React.MouseEvent<SVGSVGElement, MouseEvent>,
+    source?: string
+  ) => void;
+}
+
+
 
 interface LogoProps {
   color?: string;
+  mobileNavHandler: (event: any, source?: string) => void;
+  mobileProfileHandler: (event: any, source?: string) => void;
 }
 
 interface inputProps {
@@ -75,14 +92,14 @@ type currentUserProps = {
 };
 
 type userProfileData = {
-    id:            number;
-    createdAt:     Date;
-    updatedAt:     Date;
-    email:         string;
-    monthlySalary: number;
-    username:      string;
-    currency:      string;
-    phone:         string;
+  id: number;
+  createdAt: Date;
+  updatedAt: Date;
+  email: string;
+  monthlySalary: number;
+  username: string;
+  currency: string;
+  phone: string;
 }
 
 export const color = {
@@ -92,7 +109,7 @@ export const color = {
 type profileState = {
   monthlySalary: number;
   currency: string;
-  phone:string;
+  phone: string;
   savingsTarget: number;
 
 }
@@ -104,22 +121,22 @@ type profileUpdateActionType = {
 }
 
 type userDataItem = {
-    name: string; 
-    value: string; 
-    tag: string;
-  }
+  name: string;
+  value: string;
+  tag: string;
+}
 
 type userStateData = userDataItem[];
 
 type OutgoingRecord = {
-    id:        number;
-    createdAt: Date;
-    updatedAt: Date;
-    item:      string;
-    currency:  string;
-    userId:    number;
-    tag:       string;
-    cost:      number;
+  id: number;
+  createdAt: Date;
+  updatedAt: Date;
+  item: string;
+  currency: string;
+  userId: number;
+  tag: string;
+  cost: number;
 }
 
 export type {
@@ -140,5 +157,6 @@ export type {
   profileUpdateActionType,
   userDataItem,
   userStateData,
-  OutgoingRecord
+  OutgoingRecord,
+  ProfileMenuProps
 };

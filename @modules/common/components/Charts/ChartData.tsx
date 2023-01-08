@@ -1,6 +1,4 @@
 import { Fragment, useEffect, useState } from 'react';
-import { CircleLoader } from 'react-spinners';
-
 import Router from 'next/router';
 import SquareContainer from '../Fragments/Square-Container';
 import PageContainer from '../Fragments/Page-Container';
@@ -21,6 +19,7 @@ import {
 import { Line } from 'react-chartjs-2';
 import LineChart from './Line-Chart';
 import { color } from '@modules/common/types/types-interfaces';
+import LoadingCircle from '../loadingbar/loading-circle';
 
 ChartJS.register(
   CategoryScale,
@@ -68,7 +67,7 @@ export default function ChartData({ stock, months }: any) {
     <Fragment>
       {isLoading && (
         <div className='h-full w-full flex justify-center items-center'>
-          <CircleLoader size={100} color={color.blue} />
+        <LoadingCircle />
         </div>
       )}
       {!isLoading && (

@@ -9,6 +9,7 @@ const Mobilenav: React.FC<MobileNavProps> = ({
   scale,
   profileItems,
   mobileNavHandler,
+  mobileProfileHandler
 }) => {
   const [mobileStyle, setMobileStyle] = useState(`mobileNav ${scale}`);
 
@@ -19,7 +20,7 @@ const Mobilenav: React.FC<MobileNavProps> = ({
   return (
     <div className={mobileStyle}>
       <div className='flex justify-between items-center h-18'>
-        <Logo color={'text-blue-400'} />
+        <Logo color={'text-blue-400'} mobileNavHandler={mobileNavHandler} mobileProfileHandler={mobileProfileHandler} />
         <XMarkIcon
           className='h-6 w-6 hover:cursor-pointer'
           onClick={mobileNavHandler}

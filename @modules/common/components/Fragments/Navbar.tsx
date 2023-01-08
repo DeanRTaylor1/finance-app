@@ -32,9 +32,7 @@ const Navbar: React.FC<CustomPropsWithChildren> = ({ currentUser }) => {
     });
 
   const navItems = [
-    { label: 'Regular Outgoings', href: '/outgoings' },
-    { label: 'Daily expenses', href: '/daily' },
-    { label: 'Savings', href: '/savings' },
+    { label: 'Dashboard', href: '/dashboard' },
     { label: 'Stocks', href: '/stocks' },
     { label: 'News', href: '/news' },
   ]
@@ -56,6 +54,8 @@ const Navbar: React.FC<CustomPropsWithChildren> = ({ currentUser }) => {
 
   const profileItems = [
     currentUser && { label: 'My Profile', href: '/user/profile' },
+    currentUser && { label: 'Regular Outgoings', href: '/outgoings' },
+    currentUser && { label: 'Daily expenses', href: '/daily' },
   ]
     .filter(Boolean)
     .map(({ label, href }: any) => {
@@ -75,8 +75,9 @@ const Navbar: React.FC<CustomPropsWithChildren> = ({ currentUser }) => {
 
   const mobileProfileHandler = (event: any, source?: string) => {
     //this condition closes the navbar if the users clicks one of the buttons/links
-    if (source === 'button' && profileScale === 'scale-100') {
-      return setScale('scale-0');
+    console.log(source)
+    if (source === 'button') {
+      return setProfileScale('scale-0');
     }
     profileScale === 'scale-0'
       ? setProfileScale('scale-100')
@@ -85,7 +86,8 @@ const Navbar: React.FC<CustomPropsWithChildren> = ({ currentUser }) => {
 
   const mobileNavHandler = (event: any, source?: string) => {
     //this condition closes the navbar if the users clicks one of the buttons/links
-    if (source === 'button' && scale === 'scale-100') {
+    console.log(source)
+    if (source === 'button') {
       return setScale('scale-0');
     }
     scale === 'scale-0' ? setScale('scale-100') : setScale('scale-0');
@@ -93,19 +95,22 @@ const Navbar: React.FC<CustomPropsWithChildren> = ({ currentUser }) => {
 
   return (
     <div className='navbar'>
-      <Logo />
+      <Logo mobileNavHandler={mobileNavHandler} mobileProfileHandler={mobileProfileHandler}/>
       <ul className='hidden md:flex justify-around items-center  w-[calc(750px)] pr-12 '>{navItems}</ul>
       {/*<ul className='hidden md:flex  gap-2'>{authItems}</ul>*/}
-      <UserCircleIcon
+      {currentUser && <UserCircleIcon
         className='h-12 w-10 hidden md:flex hover:cursor-pointer'
         onClick={mobileProfileHandler}
-      />
-      <ProfileMenu
+      /> }
+      {currentUser && <ProfileMenu
         authItems={authItems}
         mobileProfileHandler={mobileProfileHandler}
         profileScale={profileScale}
         profileItems={profileItems}
-      />
+        mobileNavHandler={mobileNavHandler}
+      />}
+      {!currentUser && <ul className="md:flex hidden justify-center border-t border-gray-200 border-dashed p-4 items-center">{authItems}</ul>
+      }
       <Bars3Icon
         className='h-8 w-6 md:hidden hover:cursor-pointer'
         onClick={mobileNavHandler}
@@ -116,6 +121,7 @@ const Navbar: React.FC<CustomPropsWithChildren> = ({ currentUser }) => {
         profileItems={profileItems}
         scale={scale}
         mobileNavHandler={mobileNavHandler}
+        mobileProfileHandler={mobileProfileHandler}
       />
     </div>
   );

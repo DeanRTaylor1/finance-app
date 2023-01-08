@@ -1,9 +1,9 @@
 
 import ProfilePage from '@modules/common/components/Fragments/profile-page';
+import LoadingCircle from '@modules/common/components/loadingbar/loading-circle';
 import { color, currentUserProps } from '@modules/common/types/types-interfaces';
 import Router from 'next/router';
 import { Fragment, useEffect, useState } from 'react';
-import { CircleLoader } from 'react-spinners';
 
 
 export default function Profile( currentUser:currentUserProps ) {
@@ -20,7 +20,7 @@ export default function Profile( currentUser:currentUserProps ) {
   }, []);
   return (
     <Fragment>
-      {isLoading && <div className='h-full w-full flex justify-center items-center'> <CircleLoader size={100} color={color.blue} /> </div>}
+      {isLoading && <div className='h-full w-full flex justify-center items-center'> <LoadingCircle /> </div>}
       {!isLoading && <ProfilePage currentUser={currentUser} />}
     </Fragment>
   );

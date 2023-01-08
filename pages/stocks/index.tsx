@@ -1,5 +1,4 @@
 import { Fragment, useEffect, useState } from 'react';
-import { CircleLoader } from 'react-spinners';
 import Input from '@modules/common/components/Form/Input';
 import Router from 'next/router';
 import SquareContainer from '@modules/common/components/Fragments/Square-Container';
@@ -8,6 +7,7 @@ import GetData from '@modules/common/components/Charts/ChartData';
 import StockContainer from '@modules/common/components/Fragments/Stock-Container';
 import { color } from '@modules/common/types/types-interfaces';
 import { saveToLocal } from '@modules/common/utils/save-to-local';
+import LoadingCircle from '@modules/common/components/loadingbar/loading-circle';
 
 export default function Stocks({ currentUser }: any) {
   const [isLoading, setIsLoading] = useState<Boolean>(true);
@@ -84,7 +84,8 @@ export default function Stocks({ currentUser }: any) {
         <PageContainer>
           {isLoading && (
             <div className='h-full w-full flex justify-center items-center'>
-              <CircleLoader size={100} color={color.blue} />
+              <LoadingCircle />
+
             </div>
           )}
         </PageContainer>

@@ -6,8 +6,10 @@ import TableRow from "./table-row";
 import Input from "../../Form/Input";
 import Formerrors from "../../Form/Form-Errors";
 import AddItemForm from "./add-item-form";
-const OutgoingsPage: React.FC<any> = ( {currentUser} ) => {
+import LoadingCircle from "../../loadingbar/loading-circle";
 
+const OutgoingsPage: React.FC<any> = ({ currentUser }) => {
+  const [isLoading, setIsLoading] = useState<Boolean>(true);
   const [userOutgoings, setUserOutgoings] = useState<OutgoingRecord[]>([{} as OutgoingRecord])
   const [modalActive, setModalActive] = useState<Boolean>(false)
 
@@ -22,11 +24,19 @@ const OutgoingsPage: React.FC<any> = ( {currentUser} ) => {
 
     setUserOutgoings(response.data)
 
-    console.log(response.data)
+    // console.log(response.data)
   }
 
+
+
   useEffect(() => {
-     getUserRecords(currentUser.email)
+     let loadingTimer = setTimeout(() => setIsLoading(false), 500);
+
+    getUserRecords(currentUser.email)
+
+     return () => {
+       clearTimeout(loadingTimer)
+     }
   }, [])
 
 
@@ -45,7 +55,7 @@ const OutgoingsPage: React.FC<any> = ( {currentUser} ) => {
                 <table className="min-w-full divide-y divide-gray-200">
                   <TableHead />
                   <tbody className="divide-y divide-gray-200 font-medium">
-                    {userOutgoings && userOutgoings.map((outgoing, index) => {
+                    {!isLoading && userOutgoings.map((outgoing, index) => {
                       return (<TableRow key={index} outgoing={outgoing} currentUser={currentUser} getUserRecords={getUserRecords} />)
                     })}
 
@@ -53,6 +63,10 @@ const OutgoingsPage: React.FC<any> = ( {currentUser} ) => {
                   </tbody>
 
                 </table>
+                {isLoading && <div className='h-36 w-full flex justify-center items-center'>
+                  <LoadingCircle />   </div>
+                }
+
               </div>
             </div>
           </div>
