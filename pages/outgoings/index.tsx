@@ -5,21 +5,19 @@ import axios from "axios";
 import Router from 'next/router';
 import { Fragment, useEffect, useState } from 'react';
 
-function Outgoings( currentUser: any) {
+function Outgoings(currentUser: any) {
   const [isLoading, setIsLoading] = useState<Boolean>(true)
-  const [userState, setUserState] = useState<any>()
 
-  
+
 
   useEffect(() => {
     if (!currentUser) {
-     Router.push('/auth/signin')
+      Router.push('/auth/signin')
     } else {
-      
+
       setIsLoading(false)
     }
   }, []);
-
 
   return (
     <Fragment>

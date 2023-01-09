@@ -55,7 +55,7 @@ const Navbar: React.FC<CustomPropsWithChildren> = ({ currentUser }) => {
   const profileItems = [
     currentUser && { label: 'My Profile', href: '/user/profile' },
     currentUser && { label: 'Regular Outgoings', href: '/outgoings' },
-    currentUser && { label: 'Daily expenses', href: '/daily' },
+    currentUser && { label: 'Daily expenses', href: '/expenses' },
   ]
     .filter(Boolean)
     .map(({ label, href }: any) => {

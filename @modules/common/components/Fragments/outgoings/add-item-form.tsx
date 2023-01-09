@@ -55,8 +55,9 @@ const AddItemForm: React.FC<any> = ({ currentUser, activateModalHandler, getUser
 
 
   return (
-    <div className="w-full h-1/3 bg-transparent  flex flex-col items-center justify-center">
-      <div className="h-96 w-96  rounded-md shadow-2xl flex flex-col">        <form
+    <div className="w-screen h-screen fixed -top-40 left-0 bg-transparent flex flex-col items-center justify-center ">
+      <div className="h-96 w-96  rounded-md shadow-2xl flex flex-col">       
+      <form
         onSubmit={formSubmitHandler}
         className='h-fit w-96 flex flex-col shadow-2xl bg-white  rounded-md px-8 py-4 text-xl font-bold'
       >

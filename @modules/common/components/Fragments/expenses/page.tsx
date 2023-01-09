@@ -1,6 +1,7 @@
+
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { currentUserProps, OutgoingRecord } from '@modules/common/types/types-interfaces'
+import { currentUserProps, ExpenseRecord, OutgoingRecord } from '@modules/common/types/types-interfaces'
 import TableHead from "./table-head";
 import TableRow from "./table-row";
 import Input from "../../Form/Input";
@@ -9,9 +10,9 @@ import AddItemForm from "./add-item-form";
 import LoadingCircle from "../../loadingbar/loading-circle";
 import { ArrowRightIcon, ArrowLeftIcon } from '@heroicons/react/24/solid';
 
-const OutgoingsPage: React.FC<any> = ({ currentUser }) => {
+const ExpensesPage: React.FC<any> = ({ currentUser }) => {
   const [isLoading, setIsLoading] = useState<Boolean>(true);
-  const [userOutgoings, setUserOutgoings] = useState<OutgoingRecord[]>([{} as OutgoingRecord])
+  const [userExpenses, setUserExpenses] = useState<ExpenseRecord[]>([{} as ExpenseRecord])
   const [modalActive, setModalActive] = useState<Boolean>(false)
   const [page, setPage] = useState<number>(1);
 
@@ -22,9 +23,8 @@ const OutgoingsPage: React.FC<any> = ({ currentUser }) => {
 
   const getUserRecords = async (email: string) => {
 
-    let response = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}api/finances/outgoings`, { headers: { email, page }, withCredentials: true })
-
-    setUserOutgoings(response.data)
+    let response = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}api/finances/expenses`, { headers: { email, page }, withCredentials: true })
+    setUserExpenses(response.data)
 
     // console.log(response.data)
   }
@@ -32,18 +32,14 @@ const OutgoingsPage: React.FC<any> = ({ currentUser }) => {
   const pageHandler = (task: string) => {
    switch(task){
        case 'increase':
-        if(userOutgoings.length < 10) { return };
+        if(userExpenses.length < 10) { return };
         setPage(page + 1);
        case 'decrease':
         if(page === 1) { return };
         setPage(page - 1);
      }
   }
-
-
-
-
-
+  
   useEffect(() => {
     setIsLoading(true)
     let loadingTimer = setTimeout(() => setIsLoading(false), 750);
@@ -60,7 +56,7 @@ const OutgoingsPage: React.FC<any> = ({ currentUser }) => {
     <div className='w-[90vw] h-[calc(85vh)] flex mt-14 items-start justify-center z-10 max-w-[calc(900px)]'>
       <div className='h-[95%] w-[95%] flex flex-col gap-4 pt-8 bg-white  rounded-md px-8 py-4 text-xl font-bold'>
         <span className="flex justify-between items-center"><h1>
-          Monthly Outgoings:
+          Daily Expenses:
         </h1>
           <button className="navButton w-36" onClick={activateModalHandler}>Add Item</button>
         </span>        <div className="flex flex-col">
@@ -70,8 +66,8 @@ const OutgoingsPage: React.FC<any> = ({ currentUser }) => {
                 <table className="min-w-full divide-y divide-gray-200">
                   <TableHead />
                   <tbody className="divide-y divide-gray-200 font-medium">
-                    {!isLoading && userOutgoings.map((outgoing, index) => {
-                      return (<TableRow key={index} outgoing={outgoing} currentUser={currentUser} getUserRecords={getUserRecords} />)
+                    {!isLoading && userExpenses.map((expense, index) => {
+                      return (<TableRow key={index} expense={expense} currentUser={currentUser} getUserRecords={getUserRecords} />)
                     })}
 
 
@@ -99,4 +95,4 @@ const OutgoingsPage: React.FC<any> = ({ currentUser }) => {
 }
 
 
-export default OutgoingsPage;
+export default ExpensesPage;

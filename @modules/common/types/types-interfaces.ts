@@ -117,8 +117,11 @@ type profileState = {
 type profileUpdateActionType = {
   type: string;
   value: string;
-  key: 'monthlySalary' | 'currency' | 'phone' | 'savingsTarget'
+  key: profileUpdateActionTypeKey
 }
+
+type profileUpdateActionTypeKey = 'monthlySalary' | 'currency' | 'phone' | 'savingsTarget'
+
 
 type userDataItem = {
   name: string;
@@ -137,6 +140,18 @@ type OutgoingRecord = {
   userId: number;
   tag: string;
   cost: number;
+}
+
+type ExpenseRecord = {
+  id: number;
+  createdAt: Date;
+  updatedAt: Date;
+  item: string;
+  currency: string;
+  userId: number;
+  tag: string;
+  cost: number;
+  dateSpent: Date | string;
 }
 
 export type {
@@ -158,5 +173,7 @@ export type {
   userDataItem,
   userStateData,
   OutgoingRecord,
-  ProfileMenuProps
+  ProfileMenuProps,
+  ExpenseRecord, 
+  profileUpdateActionTypeKey
 };
