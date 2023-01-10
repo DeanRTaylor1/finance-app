@@ -10,6 +10,9 @@ import AddItemForm from "./add-item-form";
 import LoadingCircle from "../../loadingbar/loading-circle";
 import { ArrowRightIcon, ArrowLeftIcon } from '@heroicons/react/24/solid';
 
+
+
+
 const ExpensesPage: React.FC<any> = ({ currentUser }) => {
   const [isLoading, setIsLoading] = useState<Boolean>(true);
   const [userExpenses, setUserExpenses] = useState<ExpenseRecord[]>([{} as ExpenseRecord])
@@ -41,7 +44,7 @@ const ExpensesPage: React.FC<any> = ({ currentUser }) => {
   const pageHandler = (task: string) => {
     switch (task) {
       case 'increase':
-        if (totalRecordsCount <= page * 10) { return console.log(totalRecordsCount)  };
+        if (totalRecordsCount <= page * 10) { return console.log(totalRecordsCount) };
         setPage(page + 1);
       case 'decrease':
         if (page === 1) { return };
@@ -66,11 +69,13 @@ const ExpensesPage: React.FC<any> = ({ currentUser }) => {
     <div className='w-[90vw] h-[calc(85vh)] flex mt-14 items-start justify-center z-10 max-w-[calc(900px)]'>
       <div className='h-[95%] w-[95%] flex flex-col gap-4 pt-8 bg-white  rounded-md px-8 py-4 text-xl font-bold'>
         <span className="flex justify-between items-center gap-2">
-          <h1>
-            Daily Expenses:
-          </h1>
-          <span className="font-extralight text-xs">showing {`${((page - 1) * 10) + 1} - ${totalRecordsCount < page * 10 ? totalRecordsCount : page * 10} of ${totalRecordsCount}`}</span>
-          <button className="navButton w-36" onClick={activateModalHandler}>Add Item</button>
+          <div className="flex flex-col gap-2">
+            <h1>
+              Daily Expenses:
+            </h1>
+            <span className="font-extralight text-xs">showing {`${((page - 1) * 10) + 1} - ${totalRecordsCount < page * 10 ? totalRecordsCount : page * 10} of ${totalRecordsCount}`}</span>
+          </div>
+          <button className="navButton w-36 h-[36px]" onClick={activateModalHandler}>Add Item</button>
         </span>        <div className="flex flex-col">
           <div className="overflow-x-auto">
             <div className="p-1.5 w-full inline-block align-middle">
@@ -83,15 +88,11 @@ const ExpensesPage: React.FC<any> = ({ currentUser }) => {
                     }).map((expense, index) => {
                       return (<TableRow key={index} expense={expense} currentUser={currentUser} getUserRecords={getUserRecords} getCount={getCount} />)
                     })}
-
-
                   </tbody>
-
                 </table>
                 {isLoading && <div className='h-36 w-full flex justify-center items-center'>
                   <LoadingCircle />   </div>
                 }
-
               </div>
             </div>
           </div>

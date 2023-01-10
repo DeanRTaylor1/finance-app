@@ -1,5 +1,5 @@
 import { Fragment, useEffect, useState } from 'react';
-import { currentUserProps, userProfileData } from '@modules/common/types/types-interfaces';
+import { currentUserProps, userProfileData, userStateData } from '@modules/common/types/types-interfaces';
 import DoRequests from '@modules/common/hooks/do-request';
 import axios from 'axios';
 import { toNormalCase } from '@modules/common/utils/utility-functions';
@@ -8,13 +8,6 @@ import { numberWithCommas } from '@modules/common/utils/number-with-comma';
 import LoadingCircle from '../loadingbar/loading-circle';
 
 //type userStateData = Omit<userProfileData, 'id' | 'createdAt'>
-type userDataItem = {
-  name: string;
-  value: string;
-  tag: string;
-}
-
-type userStateData = userDataItem[];
 
 
 const ProfilePage: React.FC<any> = ({ currentUser }) => {

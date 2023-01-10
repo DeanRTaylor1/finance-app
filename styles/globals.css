@@ -15,7 +15,7 @@
     @apply inline-block px-6 py-2.5 bg-blue-400 text-white font-bold text-xs leading-tight uppercase rounded-md shadow-md hover:bg-blue-500 hover:shadow-lg focus:bg-blue-500 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-600 active:shadow-lg transition duration-150 ease-in-out min-w-[calc(93px)];
   }
   .mobileNav {
-    @apply min-h-[calc(30rem)] h-[calc(30rem)] w-96 p-4 origin-top-right transition-all duration-200 shadow-2xl bg-white fixed top-4 right-4 rounded-md md:hidden;
+    @apply min-h-[100vh] h-[100vh] w-screen p-4 origin-top-right transition-all ease-in-out duration-300 shadow-2xl bg-white fixed top-0 right-0  md:hidden;
   }
   .profileMenu {
     @apply min-h-[calc(30rem)]  h-[calc(30rem)] w-96 p-4 origin-top-right transition-all duration-200 shadow-2xl bg-white fixed top-4 right-4 rounded-md hidden md:block;
