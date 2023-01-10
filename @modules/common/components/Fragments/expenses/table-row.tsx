@@ -9,17 +9,19 @@ import { format } from "date-fns";
 
 type ExpenseTableRowProps = {
   expense: ExpenseRecord;
-  currentUser: currentUserProps
-  getUserRecords: (email: string) => void
+  currentUser: currentUserProps;
+  getUserRecords: (email: string) => void;
+  getCount: (email: string) => void;
 }
 
 
 
 
-const TableRow: React.FC<ExpenseTableRowProps> = ({ expense, currentUser, getUserRecords }) => {
+const TableRow: React.FC<ExpenseTableRowProps> = ({ expense, currentUser, getUserRecords, getCount }) => {
   const deleteItemHandler = async () => {
-    await axios.delete(`${process.env.NEXT_PUBLIC_API_URL}api/finances/expense`, { headers: { item: expense.item, userid: +expense.userId }, withCredentials: true })
+    await axios.delete(`${process.env.NEXT_PUBLIC_API_URL}api/finances/expenses`, { headers: { item: expense.item, userid: +expense.userId, datespent: new Date(expense.dateSpent).toISOString() }, withCredentials: true })
     getUserRecords(currentUser.email);
+    getCount(currentUser.email)
   }
 
 
@@ -41,7 +43,7 @@ const TableRow: React.FC<ExpenseTableRowProps> = ({ expense, currentUser, getUse
             href="#"
           >
             {format(new Date(expense.dateSpent), 'dd/MM/yy')}
-            </a>
+          </a>
         </td>
         <td className="px-4 py-2 text-sm font-medium text-right whitespace-nowrap">
           <a

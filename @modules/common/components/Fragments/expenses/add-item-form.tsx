@@ -14,7 +14,7 @@ import DatePickerComponent from "./date-picker"
 
 
 
-const AddItemForm: React.FC<any> = ({ currentUser, activateModalHandler, getUserRecords }) => {
+const AddItemForm: React.FC<any> = ({ currentUser, activateModalHandler, getUserRecords, getCount }) => {
   const [itemName, setItemName] = useState('')
   const [tag, setTag] = useState('')
   const [cost, setCost] = useState('')
@@ -25,7 +25,10 @@ const AddItemForm: React.FC<any> = ({ currentUser, activateModalHandler, getUser
     url: `${process.env.NEXT_PUBLIC_API_URL}api/finances/expenses`,
     method: 'post',
     body: { email: currentUser.email, item: itemName, tag, cost, currency, dateSpent: date.toISOString() },
-    onSuccess: () => getUserRecords(currentUser.email)
+    onSuccess: () => {
+      getUserRecords(currentUser.email)
+      getCount(currentUser.email)
+    }
     ,
   });
 
