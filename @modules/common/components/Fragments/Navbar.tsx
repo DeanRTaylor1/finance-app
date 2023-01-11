@@ -10,7 +10,7 @@ import ProfileMenu from './profile-menu';
 const Navbar: React.FC<CustomPropsWithChildren> = ({ currentUser }) => {
 
   const [scale, setScale] = useState('scale-0');
-  const [profileScale, setProfileScale] = useState<string>('scale-0');
+  const [profileScale, setProfileScale] = useState<string>('-right-96');
   const authItems = [
     !currentUser && { label: 'Sign in', href: '/auth/signin' },
     currentUser && { label: 'Sign out', href: '/auth/signout' },
@@ -65,7 +65,12 @@ const Navbar: React.FC<CustomPropsWithChildren> = ({ currentUser }) => {
           <li
             className='navItem'
             key={href}
-            onClick={(e) => mobileNavHandler(e, 'button')}
+            onClick={(e) => {
+              mobileNavHandler(e, 'button')
+              mobileProfileHandler(e, 'button')
+
+              }
+            }
           >
             {label}
           </li>
@@ -77,11 +82,11 @@ const Navbar: React.FC<CustomPropsWithChildren> = ({ currentUser }) => {
     //this condition closes the navbar if the users clicks one of the buttons/links
     console.log(source)
     if (source === 'button') {
-      return setProfileScale('scale-0');
+      return setProfileScale('-right-96');
     }
-    profileScale === 'scale-0'
-      ? setProfileScale('scale-100')
-      : setProfileScale('scale-0');
+    profileScale === 'right-0'
+      ? setProfileScale('-right-96')
+      : setProfileScale('right-0');
   };
 
   const mobileNavHandler = (event: any, source?: string) => {
@@ -94,7 +99,7 @@ const Navbar: React.FC<CustomPropsWithChildren> = ({ currentUser }) => {
   };
 
   return (
-    <div className='navbar'>
+    <div className='navbar max-w-[1200px]'>
       <Logo mobileNavHandler={mobileNavHandler} mobileProfileHandler={mobileProfileHandler}/>
       <ul className='hidden md:flex justify-around items-center  w-[calc(750px)] pr-12 '>{navItems}</ul>
       {/*<ul className='hidden md:flex  gap-2'>{authItems}</ul>*/}

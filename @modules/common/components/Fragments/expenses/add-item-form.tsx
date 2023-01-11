@@ -26,8 +26,9 @@ const AddItemForm: React.FC<any> = ({ currentUser, activateModalHandler, getUser
     method: 'post',
     body: { email: currentUser.email, item: itemName, tag, cost, currency, dateSpent: date.toISOString() },
     onSuccess: () => {
-      getUserRecords(currentUser.email)
-      getCount(currentUser.email)
+      getUserRecords(currentUser.email);
+      getCount(currentUser.email);
+      clearInputs();
     }
     ,
   });
@@ -42,24 +43,29 @@ const AddItemForm: React.FC<any> = ({ currentUser, activateModalHandler, getUser
   const getCost = (e: React.FormEvent<HTMLInputElement>) => {
     setCost(e.currentTarget.value);
   };
-  const getCurrency = (e: React.FormEvent<HTMLInputElement>) => {
-    setCurrency(e.currentTarget.value);
+  const getCurrency = (string: string) => {
+    console.log(string)
+    setCurrency(string);
   };
   const getDate = (date: Date) => {
-      console.log(date.toISOString())
-      setDate(date)
-    }
+    console.log(date.toISOString())
+    setDate(date)
+  }
 
-  const formSubmitHandler = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-
-    doRequest();
+  const clearInputs = () => {
     setItemName('');
     setTag('');
     setCost('');
     setCurrency('');
     setDate(new Date())
     activateModalHandler();
+
+  }
+
+  const formSubmitHandler = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
+    doRequest();
 
   };
 
@@ -103,7 +109,7 @@ const AddItemForm: React.FC<any> = ({ currentUser, activateModalHandler, getUser
               <label htmlFor='currency'>Currency:</label>
               <select
                 value={currency}
-                onChange={(e) => setCurrency(e.target.value)}
+                onChange={(e) => getCurrency(e.target.value)}
                 className='input hover:cursor-pointer'
               >
                 <option value='gbp'>gbp</option>
@@ -113,7 +119,7 @@ const AddItemForm: React.FC<any> = ({ currentUser, activateModalHandler, getUser
             </div>
             <div className='flex flex-col gap-2 text-sm'>
               <label htmlFor='date'>Date:</label>
-             <DatePickerComponent date={date} getDate={getDate} /> 
+              <DatePickerComponent date={date} getDate={getDate} />
             </div>
 
 

@@ -30,14 +30,14 @@ const OutgoingsPage: React.FC<any> = ({ currentUser }) => {
   }
 
   const pageHandler = (task: string) => {
-   switch(task){
-       case 'increase':
-        if(userOutgoings.length < 10) { return };
+    switch (task) {
+      case 'increase':
+        if (userOutgoings.length < 10) { return };
         setPage(page + 1);
-       case 'decrease':
-        if(page === 1) { return };
+      case 'decrease':
+        if (page === 1) { return };
         setPage(page - 1);
-     }
+    }
   }
 
 
@@ -59,11 +59,13 @@ const OutgoingsPage: React.FC<any> = ({ currentUser }) => {
   return (
     <div className='w-[90vw] h-[calc(85vh)] flex mt-14 items-start justify-center z-10 max-w-[calc(900px)]'>
       <div className='h-[95%] w-[95%] flex flex-col gap-4 pt-8 bg-white  rounded-md px-8 py-4 text-xl font-bold'>
-        <span className="flex justify-between items-center"><h1>
+        <span className="flex justify-between items-center">
+        <h1>
           Monthly Outgoings:
         </h1>
           <button className="navButton w-36" onClick={activateModalHandler}>Add Item</button>
-        </span>        <div className="flex flex-col">
+        </span>
+        <div className="flex flex-col">
           <div className="overflow-x-auto">
             <div className="p-1.5 w-full inline-block align-middle">
               <div className="overflow-x-hidden md:overflow-hidden border rounded-lg">

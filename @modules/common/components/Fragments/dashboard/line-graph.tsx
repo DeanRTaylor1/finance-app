@@ -12,6 +12,7 @@ import {
 import { Line } from 'react-chartjs-2';
 import getDatesInRange from '@modules/common/utils/get-dates-in-range';
 import { format } from 'date-fns';
+import { Filler } from 'chart.js/dist';
 
 
 ChartJS.register(
@@ -70,7 +71,7 @@ const DashboardChart: React.FC<any> = ({ expenses, startDate, endDate, dailySpen
   };
   const data = {
     labels: dates.map((item) => {
-      return format(new Date(item.date), 'dd/MM/yy')
+      return format(new Date(item.date), 'dd/MM')
     }),
     datasets: [
       {
@@ -80,7 +81,6 @@ const DashboardChart: React.FC<any> = ({ expenses, startDate, endDate, dailySpen
         }),
         borderColor: 'rgb(96,165,250)',
         backgroundColor: 'rgba(96,165,250, 0.2)',
-        fill: true,
         tension: 0.15,
 
 

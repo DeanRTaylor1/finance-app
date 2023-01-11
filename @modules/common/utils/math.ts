@@ -17,6 +17,7 @@ function daysInMonth(month: number, year: number) { // Use 1 for January, 2 for 
 }
 
 const getDailySpend = (totalOutgoings: number) => {
+
   const days = daysInMonth(year, month)
 
   return Math.floor(totalOutgoings / days);
