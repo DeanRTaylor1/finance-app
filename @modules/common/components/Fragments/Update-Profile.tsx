@@ -35,7 +35,7 @@ const UpdateProfile: React.FC<any> = ({ currentUser }) => {
       //console.log(!!(initialState as any)[dataItem.tag as string])
       if (initialState.hasOwnProperty(dataItem.tag)) {
         console.log('dataItem: ' + dataItem.tag)
-        dispatch({ type: 'UPDATE', value: dataItem.value, key: (dataItem.tag as profileUpdateActionTypeKey)})
+        dispatch({ type: 'UPDATE', value: dataItem.value, key: (dataItem.tag as profileUpdateActionTypeKey) })
 
       }
     }
@@ -102,8 +102,9 @@ const UpdateProfile: React.FC<any> = ({ currentUser }) => {
             onChange={(e) => dispatch({ type: 'UPDATE', value: e.target.value, key: 'currency' })}
             className='input hover:cursor-pointer'
           >
-            <option value='gbp'>gbp</option>
-            <option value='vnd'>vnd</option>
+            <option value='usd'>USD</option>
+            <option value='gbp'>GBP</option>
+            <option value='vnd'>VND</option>
 
           </select>
         </div>

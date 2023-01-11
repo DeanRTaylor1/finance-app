@@ -70,6 +70,7 @@ const DashboardPage: React.FC<any> = ({ currentUser }) => {
       {!userData && <LoadingCircle />}
       {userData && <Fragment>
         <DashboardChartContainer>
+        <div className="font-bold text-xl">Spending Split</div>
           {userData && <DonutChart outgoingsSum={userData.outgoingsSum} />}
         </DashboardChartContainer>
         <div className="w-full flex gap-8 flex-wrap items-center justify-center md:justify-between">

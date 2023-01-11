@@ -7,17 +7,17 @@ import Router from 'next/router';
 import { Fragment, useEffect, useState } from 'react';
 
 
-function Dashboard(currentUser: any) {
+function Dashboard({ currentUser }: any) {
   const [isLoading, setIsLoading] = useState<Boolean>(true)
 
 
- useEffect(() => {
+  useEffect(() => {
     if (!currentUser) {
       Router.push('/auth/signin')
-    }else {
+    } else {
 
       setIsLoading(false)
-     }
+    }
   }, []);
 
   return (

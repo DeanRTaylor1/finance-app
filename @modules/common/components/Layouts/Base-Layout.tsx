@@ -1,10 +1,16 @@
-import React, { Fragment, PropsWithChildren, useContext, useEffect } from 'react';
+import React, { Fragment, PropsWithChildren, useContext, useEffect, useState } from 'react';
 import { CustomPropsWithChildren } from '@modules/common/types/types-interfaces';
 import Navbar from '../Fragments/Navbar';
+import { useRouter } from 'next/router';
 
-const BaseLayout: React.FC<CustomPropsWithChildren> = ({currentUser, children}) => {
+const BaseLayout: React.FC<CustomPropsWithChildren> = ({ currentUser, children }) => {
+  const router = useRouter();
+  const [css, setCss] = useState<string>(`baseLayout justify-start`);
+  useEffect(() => {
+    router.pathname === '/' ? setCss(`baseLayout justify-start`) : setCss(`baseLayout justify-between`)
+  }, [router.pathname])
   return (
-    <div className='p-4 flex flex-col justify-between items-center min-h-screen h-fit bg-gray-100'>
+    <div className={css}>
       <Navbar currentUser={currentUser} />
       {children}
       <div>Footer</div>

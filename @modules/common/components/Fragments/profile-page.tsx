@@ -62,6 +62,7 @@ const ProfilePage: React.FC<any> = ({ currentUser }) => {
               </div>)
           })}
         {!isLoading && <Link href='/user/profile/update'> <button className='signInButton'>Update Details</button> </Link>}
+        {!isLoading &&  <button className='signInButton bg-red-600 hover:bg-red-800 focus:bg-red-800'>Delete Account</button> }
       </div>
     </div>
   );

@@ -19,7 +19,7 @@ const ProfileMenu: React.FC<ProfileMenuProps> = ({mobileNavHandler, profileItems
           <Logo color={'text-blue-400'} mobileProfileHandler={mobileProfileHandler} mobileNavHandler={mobileNavHandler} />
           <XMarkIcon className="h-6 w-6 hover:cursor-pointer" onClick={mobileProfileHandler} />
         </div>
-        <div className='flex flex-col h-[calc(80%)] justify-between'>
+        <div className='flex flex-col h-[calc(92%)] justify-between'>
           <ul className="md:flex hidden flex-col gap-2 py-4">
            {profileItems} 
           </ul>
