@@ -45,7 +45,7 @@ const SignupForm: React.FC = () => {
   };
 
   return (
-    <div className='w-full h-full flex mt-14 items-start justify-center z-10'>
+    <div className='w-full min-h-[80vh] h-full flex mt-14 items-start justify-center z-10'>
       <form
         onSubmit={handleSubmit((data, e) => {
           // console.log(data);

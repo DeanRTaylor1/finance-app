@@ -18,7 +18,7 @@
     @apply min-h-[100vh] h-[100vh] w-[100vw] p-6 origin-top-right transition-all ease-in-out duration-300 shadow-2xl bg-white fixed top-0 left-0  md:hidden;
   }
   .profileMenu {
-    @apply min-h-[calc(30rem)] h-screen w-96 p-4 flex flex-col justify-between transition-all duration-200 shadow-2xl bg-white absolute top-0 rounded-md hidden md:block;
+    @apply min-h-[calc(30rem)] hidden md:flex h-screen w-96 p-4  flex-col justify-between transition-all duration-200 shadow-2xl bg-white fixed top-0 rounded-md ;
   }
   .logo {
     @apply text-3xl font-extrabold w-max;
@@ -38,6 +38,6 @@
     @apply h-2 text-xs text-red-500;
   }
   .baseLayout {
-    @apply p-4 flex w-screen flex-col items-center min-h-screen h-fit bg-gray-100
+    @apply overflow-x-hidden p-4 flex min-w-[95vw] flex-col items-center min-h-screen  h-fit bg-gray-100 
   }
 }

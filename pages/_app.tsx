@@ -1,5 +1,5 @@
 import '../styles/globals.css';
-import React, { useContext, useEffect } from 'react'
+import React, { useContext, useEffect } from 'react';
 import Head from 'next/head';
 import type { AppProps, NextWebVitalsMetric } from 'next/app';
 import BaseLayout from '@modules/common/components/Layouts/Base-Layout';
@@ -12,25 +12,18 @@ interface CustomProps extends AppProps {
   currentUser?: currentUserProps;
 }
 
-
-
 export default function App({
   Component,
   pageProps,
   currentUser,
 }: CustomProps) {
-
-
   return (
-
     <BaseLayout currentUser={currentUser}>
       <Head>
         <title>My Finance</title>
       </Head>
       <Component {...pageProps} currentUser={currentUser} />
     </BaseLayout>
-
-
   );
 }
 App.getInitialProps = async (appContext: any) => {
@@ -47,7 +40,6 @@ App.getInitialProps = async (appContext: any) => {
 
   return { pageProps, ...data };
 };
-
 
 /*
  App.getInitialProps = async (appContext: any) => {
@@ -71,5 +63,3 @@ App.getInitialProps = async (appContext: any) => {
   return { pageProps, ...data };
 };
 */
-
-

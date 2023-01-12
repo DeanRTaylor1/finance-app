@@ -1,35 +1,29 @@
-import DoRequest from "@modules/common/hooks/do-request"
-import Link from "next/link"
-import Router from "next/router"
-import { useState } from "react"
-import Formerrors from "../../Form/Form-Errors"
-import Input from "../../Form/Input"
+import DoRequest from '@modules/common/hooks/do-request';
+import Link from 'next/link';
+import Router from 'next/router';
+import { useState } from 'react';
+import Formerrors from '../../Form/Form-Errors';
+import Input from '../../Form/Input';
 
-
-
-
-
-
-
-
-
-const AddItemForm: React.FC<any> = ({ currentUser, activateModalHandler, getUserRecords }) => {
-  const [itemName, setItemName] = useState('')
-  const [tag, setTag] = useState('')
-  const [cost, setCost] = useState('')
-  const [currency, setCurrency] = useState('')
+const AddItemForm: React.FC<any> = ({
+  currentUser,
+  activateModalHandler,
+  getUserRecords,
+}) => {
+  const [itemName, setItemName] = useState('');
+  const [tag, setTag] = useState('');
+  const [cost, setCost] = useState('');
+  const [currency, setCurrency] = useState('');
 
   const { doRequest, errors } = DoRequest({
     url: `${process.env.NEXT_PUBLIC_API_URL}api/finances/outgoings`,
     method: 'post',
     body: { email: currentUser.email, item: itemName, tag, cost, currency },
     onSuccess: () => {
-      getUserRecords(currentUser.email)
+      getUserRecords(currentUser.email);
       clearInputs();
-    }
-    ,
+    },
   });
-
 
   const getItemName = (e: React.FormEvent<HTMLInputElement>) => {
     setItemName(e.currentTarget.value);
@@ -49,21 +43,18 @@ const AddItemForm: React.FC<any> = ({ currentUser, activateModalHandler, getUser
     setTag('');
     setCost('');
     setCurrency('');
-    activateModalHandler()
-
-  }
+    activateModalHandler();
+  };
 
   const formSubmitHandler = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     doRequest();
-
   };
 
-
   return (
-    <div className="w-screen h-screen fixed -top-40 left-0 bg-transparent flex flex-col items-center justify-center ">
-      <div className="h-96 w-96  rounded-md shadow-2xl flex flex-col">
+    <div className='w-screen h-screen fixed -top-40 left-0 bg-transparent flex flex-col items-center justify-center '>
+      <div className='h-96 w-96  rounded-md shadow-2xl flex flex-col'>
         <form
           onSubmit={formSubmitHandler}
           className='h-fit w-96 flex flex-col shadow-2xl bg-white  rounded-md px-8 py-4 text-xl font-bold'
@@ -105,28 +96,22 @@ const AddItemForm: React.FC<any> = ({ currentUser, activateModalHandler, getUser
               >
                 <option value='gbp'>gbp</option>
                 <option value='vnd'>vnd</option>
-
               </select>
             </div>
-
-
-            <div className="flex gap-2">
-              <button className='signInButton w-[calc(50%)] bg-red-400 hover:bg-red-500 focus:bg-red-500' onClick={activateModalHandler}>Cancel</button>
+            <div className='flex gap-2'>
+              <button
+                className='signInButton w-[calc(50%)] bg-red-400 hover:bg-red-500 focus:bg-red-500'
+                onClick={activateModalHandler}
+              >
+                Cancel
+              </button>
               <button className='signInButton w-[calc(50%)]'>Add</button>
-            </div>        </div>
+            </div>{' '}
+          </div>
         </form>
-
       </div>
     </div>
+  );
+};
 
-  )
-
-
-}
-
-
-export default AddItemForm
-
-
-
-
+export default AddItemForm;

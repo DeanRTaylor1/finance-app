@@ -1,27 +1,25 @@
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js';
 import { Fragment } from 'react';
 import { Pie } from 'react-chartjs-2';
-import distinctColors from 'distinct-colors'
-
+import distinctColors from 'distinct-colors';
+import ChartDataLabels, { Context } from 'chartjs-plugin-datalabels';
 
 ChartJS.register(ArcElement, Tooltip, Legend);
 
 const DonutChart: React.FC<any> = ({ outgoingsSum }) => {
-
   const colors = outgoingsSum.map((item: any) => {
-
-    return distinctColors({ count: 30 })
-  })
+    return distinctColors({ count: 30 });
+  });
 
   const data = {
     labels: outgoingsSum.map((item: any) => {
-      return item.tag
+      return item.tag;
     }),
     datasets: [
       {
         label: 'Amount:',
         data: outgoingsSum.map((item: any) => {
-          return item.totalCost
+          return item.totalCost;
         }),
         backgroundColor: [
           'rgba(234, 199, 199, 1)',
@@ -34,17 +32,21 @@ const DonutChart: React.FC<any> = ({ outgoingsSum }) => {
           'rgba(154, 134, 164, 1)',
           'rgba(140, 192, 222, 1)',
         ],
-        borderColor: '#fff' 
-        },
+        borderColor: '#fff',
+      },
     ],
   };
+  const options = {
+    plugins: {
+      legend: {
+        display: false,
+      },
+    },
+  };
 
-   return (
-    <Fragment>
-      {outgoingsSum && <Pie data={data} />}
-         </Fragment>
-  )
-}
-
+  return (
+    <Fragment>{outgoingsSum && <Pie data={data} options={options} />}</Fragment>
+  );
+};
 
 export default DonutChart;

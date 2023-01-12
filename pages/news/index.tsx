@@ -25,7 +25,7 @@ export default function News({ currentUser }: any) {
         <div className='flex flex-col md:flex-row md:gap-8 md:flex-wrap md:justify-center items-center w-11/12 gap-4'>
           {isLoading && (
             <div className='h-full w-full flex justify-center items-center'>
-            <LoadingCircle />
+              <LoadingCircle />
             </div>
           )}
           {articles && <Stripes />}

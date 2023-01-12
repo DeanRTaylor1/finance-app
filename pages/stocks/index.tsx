@@ -30,31 +30,32 @@ export default function Stocks({ currentUser }: any) {
   // ]
 
   useEffect(() => {
-
     if (!currentUser) {
       Router.push('/auth/signin');
     }
-    let localStocks: any = localStorage.getItem('stocks')
-    setStocks(JSON.parse(localStocks))
+    let localStocks: any = localStorage.getItem('stocks');
+    setStocks(JSON.parse(localStocks));
 
-    console.log(JSON.parse(localStocks))
+    console.log(JSON.parse(localStocks));
     setIsLoading(false);
   }, []);
 
-  const setInitialStocks = (stockCode:string, months:string) => {
-          setStockCode(stockCode) 
-          setMonths
-      }
-
+  const setInitialStocks = (stockCode: string, months: string) => {
+    setStockCode(stockCode);
+    setMonths;
+  };
 
   const addStockHandler = () => {
-    console.log(JSON.stringify(stocks))
-    console.log({ code: stockCode, months })
+    console.log(JSON.stringify(stocks));
+    console.log({ code: stockCode, months });
     if (!stocks) {
       setStocks([{ code: stockCode, months }]);
       setStockCode('');
       setMonths(0);
-      window.localStorage.setItem('stocks', JSON.stringify([{ code: stockCode, months }]))
+      window.localStorage.setItem(
+        'stocks',
+        JSON.stringify([{ code: stockCode, months }])
+      );
       return;
     }
     //only storing one stock to limit API calls
@@ -62,8 +63,6 @@ export default function Stocks({ currentUser }: any) {
     setStocks(temp);
     setStockCode('');
     setMonths(0);
-   
-
   };
 
   const deleteStockHandler = (stock: string) => {
@@ -74,8 +73,7 @@ export default function Stocks({ currentUser }: any) {
       return stockObject.code !== stock;
     });
     setStocks(temp);
-    window.localStorage.setItem('stocks',
-      JSON.stringify(temp))
+    window.localStorage.setItem('stocks', JSON.stringify(temp));
   };
 
   if (isLoading) {
@@ -85,13 +83,11 @@ export default function Stocks({ currentUser }: any) {
           {isLoading && (
             <div className='h-full w-full flex justify-center items-center'>
               <LoadingCircle />
-
             </div>
           )}
         </PageContainer>
       </Fragment>
-
-    )
+    );
   } else {
     return (
       <Fragment>

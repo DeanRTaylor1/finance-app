@@ -9,22 +9,25 @@ interface MobileNavProps {
     event: React.MouseEvent<SVGSVGElement, MouseEvent>,
     source?: string
   ) => void;
-  mobileProfileHandler: (event: React.MouseEvent<SVGSVGElement, MouseEvent>, source?: string) => void
-
-}
-
-type ProfileMenuProps = {
-  authItems: React.ReactElement[],
-  profileItems: React.ReactElement[],
-  mobileProfileHandler: (event: React.MouseEvent<SVGSVGElement, MouseEvent>, source?: string) => void
-  profileScale: string
-  mobileNavHandler: (
+  mobileProfileHandler: (
     event: React.MouseEvent<SVGSVGElement, MouseEvent>,
     source?: string
   ) => void;
 }
 
-
+type ProfileMenuProps = {
+  authItems: React.ReactElement[];
+  profileItems: React.ReactElement[];
+  mobileProfileHandler: (
+    event: React.MouseEvent<SVGSVGElement, MouseEvent>,
+    source?: string
+  ) => void;
+  profileScale: string;
+  mobileNavHandler: (
+    event: React.MouseEvent<SVGSVGElement, MouseEvent>,
+    source?: string
+  ) => void;
+};
 
 interface LogoProps {
   color?: string;
@@ -100,34 +103,36 @@ type userProfileData = {
   username: string;
   currency: string;
   phone: string;
-}
+};
 
 export const color = {
-  blue: '#60a5fa'
-}
+  blue: '#60a5fa',
+};
 
 type profileState = {
   monthlySalary: number;
   currency: string;
   phone: string;
   savingsTarget: number;
-
-}
+};
 
 type profileUpdateActionType = {
   type: string;
   value: string;
-  key: profileUpdateActionTypeKey
-}
+  key: profileUpdateActionTypeKey;
+};
 
-type profileUpdateActionTypeKey = 'monthlySalary' | 'currency' | 'phone' | 'savingsTarget'
-
+type profileUpdateActionTypeKey =
+  | 'monthlySalary'
+  | 'currency'
+  | 'phone'
+  | 'savingsTarget';
 
 type userDataItem = {
   name: string;
   value: string;
   tag: string;
-}
+};
 
 type userStateData = userDataItem[];
 
@@ -140,7 +145,7 @@ type OutgoingRecord = {
   userId: number;
   tag: string;
   cost: number;
-}
+};
 
 type ExpenseRecord = {
   id: number;
@@ -152,9 +157,7 @@ type ExpenseRecord = {
   tag: string;
   cost: number;
   dateSpent: Date | string;
-}
-
-
+};
 
 export type {
   MobileNavProps,
@@ -176,6 +179,6 @@ export type {
   userStateData,
   OutgoingRecord,
   ProfileMenuProps,
-  ExpenseRecord, 
-  profileUpdateActionTypeKey
+  ExpenseRecord,
+  profileUpdateActionTypeKey,
 };

@@ -8,7 +8,6 @@ import { CustomPropsWithChildren } from '@modules/common/types/types-interfaces'
 import ProfileMenu from './profile-menu';
 
 const Navbar: React.FC<CustomPropsWithChildren> = ({ currentUser }) => {
-
   const [scale, setScale] = useState('scale-0');
   const [profileScale, setProfileScale] = useState<string>('-right-96');
   const authItems = [
@@ -66,11 +65,9 @@ const Navbar: React.FC<CustomPropsWithChildren> = ({ currentUser }) => {
             className='navItem'
             key={href}
             onClick={(e) => {
-              mobileNavHandler(e, 'button')
-              mobileProfileHandler(e, 'button')
-
-              }
-            }
+              mobileNavHandler(e, 'button');
+              mobileProfileHandler(e, 'button');
+            }}
           >
             {label}
           </li>
@@ -80,9 +77,9 @@ const Navbar: React.FC<CustomPropsWithChildren> = ({ currentUser }) => {
 
   const mobileProfileHandler = (event: any, source?: string) => {
     //this condition closes the navbar if the users clicks one of the buttons/links
-    console.log(source)
+    console.log(source);
     if (source === 'button') {
-      return setProfileScale('-right-96');
+      return setProfileScale('-right-96 ');
     }
     profileScale === 'right-0'
       ? setProfileScale('-right-96')
@@ -91,7 +88,7 @@ const Navbar: React.FC<CustomPropsWithChildren> = ({ currentUser }) => {
 
   const mobileNavHandler = (event: any, source?: string) => {
     //this condition closes the navbar if the users clicks one of the buttons/links
-    console.log(source)
+    console.log(source);
     if (source === 'button') {
       return setScale('scale-0');
     }
@@ -100,22 +97,34 @@ const Navbar: React.FC<CustomPropsWithChildren> = ({ currentUser }) => {
 
   return (
     <div className='navbar max-w-[1200px]'>
-      <Logo mobileNavHandler={mobileNavHandler} mobileProfileHandler={mobileProfileHandler}/>
-      <ul className='hidden md:flex justify-around items-center  w-[calc(750px)] pr-12 '>{navItems}</ul>
-      {/*<ul className='hidden md:flex  gap-2'>{authItems}</ul>*/}
-      {currentUser && <UserCircleIcon
-        className='h-12 w-10 hidden md:flex hover:cursor-pointer'
-        onClick={mobileProfileHandler}
-      /> }
-      {currentUser && <ProfileMenu
-        authItems={authItems}
-        mobileProfileHandler={mobileProfileHandler}
-        profileScale={profileScale}
-        profileItems={profileItems}
+      <Logo
         mobileNavHandler={mobileNavHandler}
-      />}
-      {!currentUser && <ul className="md:flex hidden justify-center border-t border-gray-200 border-dashed p-4 items-center">{authItems}</ul>
-      }
+        mobileProfileHandler={mobileProfileHandler}
+      />
+      <ul className='hidden md:flex justify-around items-center  w-[calc(750px)] pr-12 '>
+        {navItems}
+      </ul>
+      {/*<ul className='hidden md:flex  gap-2'>{authItems}</ul>*/}
+      {currentUser && (
+        <UserCircleIcon
+          className='h-12 w-10 hidden md:flex hover:cursor-pointer'
+          onClick={mobileProfileHandler}
+        />
+      )}
+      {currentUser && (
+        <ProfileMenu
+          authItems={authItems}
+          mobileProfileHandler={mobileProfileHandler}
+          profileScale={profileScale}
+          profileItems={profileItems}
+          mobileNavHandler={mobileNavHandler}
+        />
+      )}
+      {!currentUser && (
+        <ul className='md:flex hidden justify-center border-t border-gray-200 border-dashed p-4 items-center'>
+          {authItems}
+        </ul>
+      )}
       <Bars3Icon
         className='h-8 w-6 md:hidden hover:cursor-pointer'
         onClick={mobileNavHandler}

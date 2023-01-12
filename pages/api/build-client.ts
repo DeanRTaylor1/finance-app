@@ -2,7 +2,7 @@ import axios from 'axios';
 
 const BuildClient = ({ req }: any) => {
   if (typeof window === 'undefined') {
-    console.log(process.env.NEXT_PUBLIC_API_URL)
+    console.log(process.env.NEXT_PUBLIC_API_URL);
     return axios.create({
       baseURL: process.env.NEXT_PUBLIC_API_URL,
       headers: req.headers,
@@ -10,8 +10,8 @@ const BuildClient = ({ req }: any) => {
   } else {
     return axios.create({
       baseURL: process.env.NEXT_PUBLIC_API_URL,
-      withCredentials: true
-          });
+      withCredentials: true,
+    });
   }
 };
 
