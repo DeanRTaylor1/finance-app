@@ -41,7 +41,7 @@ const ExpensesPage: React.FC<any> = ({ currentUser }) => {
       `${process.env.NEXT_PUBLIC_API_URL}api/finances/expenses/count`,
       { headers: { email }, withCredentials: true }
     );
-    console.log(data.count);
+    //console.log(data.count);
     setTotalRecordsCount(data.count);
 
     // console.log(response.data)
@@ -51,7 +51,7 @@ const ExpensesPage: React.FC<any> = ({ currentUser }) => {
     switch (task) {
       case 'increase':
         if (totalRecordsCount <= page * 10) {
-          return console.log(totalRecordsCount);
+          return //console.log(totalRecordsCount);
         }
         setPage(page + 1);
       case 'decrease':
@@ -96,10 +96,10 @@ const ExpensesPage: React.FC<any> = ({ currentUser }) => {
         <div className='flex flex-col'>
           <div className='overflow-x-auto'>
             <div className='p-1.5 w-full inline-block align-middle'>
-              <div className='overflow-x-hidden md:overflow-hidden border rounded-lg'>
+              <div className='overflow-x-scroll sm:overflow-hidden border rounded-lg'>
                 <table className='min-w-full divide-y divide-gray-200'>
                   <TableHead />
-                  <tbody className='divide-y divide-gray-200 font-medium'>
+                  <tbody className='divide-y divide-gray-200 font-light text-xs md:text-lg md:font-medium'>
                     {!isLoading &&
                       userExpenses
                         .sort((a: ExpenseRecord, b: ExpenseRecord) => {

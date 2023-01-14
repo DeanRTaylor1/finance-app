@@ -39,7 +39,7 @@ const DashboardPage: React.FC<any> = ({ currentUser }) => {
         withCredentials: true,
       }
     );
-    console.log(response.data);
+    //console.log(response.data);
     if (response.data.monthlySalary === 0) {
       return Router.push('/user/profile');
     }
@@ -52,18 +52,14 @@ const DashboardPage: React.FC<any> = ({ currentUser }) => {
   useEffect(() => {
     setUserData(null);
     getUserData(currentUser.email, startDate, endDate);
-    console.log(startDate, endDate);
+    //console.log(startDate, endDate);
     let loadingTimer = setTimeout(() => setIsLoading(false), 750);
     return () => {
       clearTimeout(loadingTimer);
     };
-  }, [startDate, endDate]);
+  }, [startDate, endDate, currentUser.email]);
 
-  const getCurrency = (currency: string) => {
-    return {
-      __html: getCurrencySymbol(currency),
-    };
-  };
+ 
 
   const headlineItems = [
     userData && {
@@ -99,7 +95,7 @@ const DashboardPage: React.FC<any> = ({ currentUser }) => {
           <div className='w-full flex gap-8 flex-wrap items-center justify-center md:justify-between'>
             <div className='w-full md:w-[18rem] md:h-[190px] bg-white aspect-video rounded-md flex flex-col justify-center items-center p-4 border-t-8 border-blue-500 border border-b-black border-r-black border-l-black shadow-md'>
               <div className='font-bold text-xl'>Breakdown</div>
-              {userData && <DonutChart outgoingsSum={userData.outgoingsSum} />}
+              {userData && <DonutChart currencySymbol={getCurrencySymbol(userData.currency)} outgoingsSum={userData.outgoingsSum} />}
             </div>
             {userData && headlineItems}
           </div>

@@ -60,7 +60,7 @@ const DashboardChart: React.FC<any> = ({
   };
 
   useEffect(() => {
-    console.log(expenses, startDate, endDate);
+    //console.log(expenses, startDate, endDate);
     const dates = getDatesInRange(new Date(startDate), new Date(endDate));
     setDates(dates);
     matchDates(dates, dailySpend);

@@ -23,21 +23,21 @@ const Confirm: React.FC = () => {
   });
 
   useEffect(() => {
-    () => doRequest();
+    doRequest();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
     <Fragment>
       {!isLoading && (
-        <div className='h-full w-full flex justify-center items-center font-extrabold text3xl'>
+        <div className='h-full w-full flex justify-center items-center font-extrabold gap-2 text3xl'>
           Email Confirmed! If not redirected click here to go{' '}
           <Link
             className='underline underline-offset-4 font-extrabold text3xl'
             href='/'
           >
             {' '}
-            Home
+            <p>Home</p>
           </Link>
           .
         </div>

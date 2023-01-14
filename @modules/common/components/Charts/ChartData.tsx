@@ -60,7 +60,7 @@ export default function ChartData({ stock, months }: any) {
   }, []);
 
   useEffect(() => {
-    console.log(details, finalDates, finalStockData);
+    //console.log(details, finalDates, finalStockData);
   }, [details, finalDates, finalStockData]);
 
   return (

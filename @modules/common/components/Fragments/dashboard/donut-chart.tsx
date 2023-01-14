@@ -3,10 +3,11 @@ import { Fragment } from 'react';
 import { Pie } from 'react-chartjs-2';
 import distinctColors from 'distinct-colors';
 import ChartDataLabels, { Context } from 'chartjs-plugin-datalabels';
+import { getCurrencySymbol } from '@modules/common/utils/currency';
 
 ChartJS.register(ArcElement, Tooltip, Legend);
 
-const DonutChart: React.FC<any> = ({ outgoingsSum }) => {
+const DonutChart: React.FC<any> = ({ outgoingsSum, currencySymbol }) => {
   const colors = outgoingsSum.map((item: any) => {
     return distinctColors({ count: 30 });
   });
@@ -17,9 +18,10 @@ const DonutChart: React.FC<any> = ({ outgoingsSum }) => {
     }),
     datasets: [
       {
-        label: 'Amount:',
+        label: `Amount in ${currencySymbol}`,
         data: outgoingsSum.map((item: any) => {
-          return item.totalCost;
+          console.log(currencySymbol)
+          return `${item.totalCost}`;
         }),
         backgroundColor: [
           'rgba(234, 199, 199, 1)',

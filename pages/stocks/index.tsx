@@ -36,9 +36,8 @@ export default function Stocks({ currentUser }: any) {
     let localStocks: any = localStorage.getItem('stocks');
     setStocks(JSON.parse(localStocks));
 
-    console.log(JSON.parse(localStocks));
     setIsLoading(false);
-  }, []);
+  }, [currentUser]);
 
   const setInitialStocks = (stockCode: string, months: string) => {
     setStockCode(stockCode);
@@ -46,9 +45,9 @@ export default function Stocks({ currentUser }: any) {
   };
 
   const addStockHandler = () => {
-    console.log(JSON.stringify(stocks));
-    console.log({ code: stockCode, months });
-    if (!stocks) {
+    let localStocks: any = localStorage.getItem('stocks');
+
+    if (JSON.parse(localStocks).length === 0) {
       setStocks([{ code: stockCode, months }]);
       setStockCode('');
       setMonths(0);
@@ -59,7 +58,7 @@ export default function Stocks({ currentUser }: any) {
       return;
     }
     //only storing one stock to limit API calls
-    const temp = [...stocks, { code: stockCode, months }];
+    const temp = [...stocks!, { code: stockCode, months }];
     setStocks(temp);
     setStockCode('');
     setMonths(0);

@@ -11,7 +11,7 @@ import axios from 'axios';
 import { toNormalCase } from '@modules/common/utils/utility-functions';
 import profileReducer from '@modules/common/utils/update-profile-reducer';
 import Router from 'next/router';
-import Formerrors from '../Form/Form-Errors';
+import Formerrors from '../../Form/Form-Errors';
 
 //type userStateData = Omit<userProfileData, 'id' | 'createdAt'>
 
@@ -41,7 +41,7 @@ const UpdateProfile: React.FC<any> = ({ currentUser }) => {
       //console.log(dataItem.tag)
       //console.log(!!(initialState as any)[dataItem.tag as string])
       if (initialState.hasOwnProperty(dataItem.tag)) {
-        console.log('dataItem: ' + dataItem.tag);
+        //console.log('dataItem: ' + dataItem.tag);
         dispatch({
           type: 'UPDATE',
           value: dataItem.value,
@@ -60,7 +60,7 @@ const UpdateProfile: React.FC<any> = ({ currentUser }) => {
     let results = [];
     let responseData = response.data;
     for (let key in responseData as userProfileData) {
-      console.log(key, responseData[key]);
+      //console.log(key, responseData[key]);
       let temp = {
         name: toNormalCase(key),
         value: responseData[key],
@@ -79,12 +79,12 @@ const UpdateProfile: React.FC<any> = ({ currentUser }) => {
   useEffect(() => {}, []);
 
   const onSubmit = () => {
-    console.log({
+    /* console.log({
       monthlySalary: state.monthlySalary,
       currency: state.currency,
       phone: state.phone,
       savingsTarget: state.savingsTarget,
-    });
+    }); */
     doRequest();
   };
   return (

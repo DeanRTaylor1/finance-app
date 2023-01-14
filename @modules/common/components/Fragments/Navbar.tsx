@@ -5,7 +5,7 @@ import Mobilenav from './Mobile-Nav';
 import uniqid from 'uniqid';
 import { useContext, useState } from 'react';
 import { CustomPropsWithChildren } from '@modules/common/types/types-interfaces';
-import ProfileMenu from './profile-menu';
+import ProfileMenu from './profile/profile-menu';
 
 const Navbar: React.FC<CustomPropsWithChildren> = ({ currentUser }) => {
   const [scale, setScale] = useState('scale-0');
@@ -31,12 +31,14 @@ const Navbar: React.FC<CustomPropsWithChildren> = ({ currentUser }) => {
     });
 
   const navItems = [
-    { label: 'Dashboard', href: '/dashboard' },
-    { label: 'Stocks', href: '/stocks' },
-    { label: 'News', href: '/news' },
+    currentUser && { label: 'Dashboard', href: '/dashboard' },
+    true && { label: 'Stocks', href: '/stocks' },
+    true && { label: 'News', href: '/news' },
+    true && { label: 'Guide', href: '/guide' },
+    true && { label: 'About', href: '/about' },
   ]
-    .filter((linkConfig) => linkConfig)
-    .map(({ label, href }) => {
+    .filter(Boolean)
+    .map(({ label, href }: any) => {
       return (
         <Link key={uniqid()} className='nav-link' href={href}>
           {' '}
@@ -77,7 +79,7 @@ const Navbar: React.FC<CustomPropsWithChildren> = ({ currentUser }) => {
 
   const mobileProfileHandler = (event: any, source?: string) => {
     //this condition closes the navbar if the users clicks one of the buttons/links
-    console.log(source);
+    //console.log(source);
     if (source === 'button') {
       return setProfileScale('-right-96 ');
     }
@@ -88,7 +90,7 @@ const Navbar: React.FC<CustomPropsWithChildren> = ({ currentUser }) => {
 
   const mobileNavHandler = (event: any, source?: string) => {
     //this condition closes the navbar if the users clicks one of the buttons/links
-    console.log(source);
+    //console.log(source);
     if (source === 'button') {
       return setScale('scale-0');
     }

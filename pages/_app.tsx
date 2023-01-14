@@ -20,7 +20,7 @@ export default function App({
   return (
     <BaseLayout currentUser={currentUser}>
       <Head>
-        <title>My Finance</title>
+        <title>My Finance</title>md
       </Head>
       <Component {...pageProps} currentUser={currentUser} />
     </BaseLayout>

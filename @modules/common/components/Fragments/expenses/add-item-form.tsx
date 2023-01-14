@@ -1,7 +1,7 @@
 import DoRequest from '@modules/common/hooks/do-request';
 import Link from 'next/link';
 import Router from 'next/router';
-import { useState } from 'react';
+import { ChangeEvent, useState } from 'react';
 import Formerrors from '../../Form/Form-Errors';
 import Input from '../../Form/Input';
 import DatePickerComponent from './date-picker';
@@ -45,12 +45,12 @@ const AddItemForm: React.FC<any> = ({
   const getCost = (e: React.FormEvent<HTMLInputElement>) => {
     setCost(e.currentTarget.value);
   };
-  const getCurrency = (string: string) => {
-    console.log(string);
-    setCurrency(string);
+  const getCurrency = (e: ChangeEvent<HTMLSelectElement>) => {
+    //console.log(e.target.value);
+    setCurrency(e.target.value);
   };
   const getDate = (date: Date) => {
-    console.log(date.toISOString());
+    //console.log(date.toISOString());
     setDate(date);
   };
 
@@ -108,11 +108,12 @@ const AddItemForm: React.FC<any> = ({
               <label htmlFor='currency'>Currency:</label>
               <select
                 value={currency}
-                onChange={(e) => getCurrency(e.target.value)}
+                onChange={(e) => getCurrency(e)}
                 className='input hover:cursor-pointer'
               >
-                <option value='gbp'>gbp</option>
-                <option value='vnd'>vnd</option>
+                <option value='usd'>USD</option>
+                <option value='gbp'>GBP</option>
+                <option value='vnd'>VND</option>
               </select>
             </div>
             <div className='flex flex-col gap-2 text-sm'>

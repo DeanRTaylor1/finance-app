@@ -1,5 +1,5 @@
 export function numberWithCommas(x: number) {
-  console.log(x)
+  //console.log(x)
   if (!x) {
     return
   }

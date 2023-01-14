@@ -7,7 +7,7 @@ const DoRequest = ({ url, method, body, onSuccess }: useRequest) => {
 
   const doRequest = async (props = { withCredentials: true }) => {
     try {
-      console.log({ ...body, ...props });
+      //console.log({ ...body, ...props });
       setErrors(null);
       const response = await axios[method](url, { ...body }, { ...props });
 

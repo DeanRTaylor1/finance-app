@@ -1,4 +1,4 @@
-import Logo from './Logo';
+import Logo from '../Logo';
 import { useEffect, useState, Fragment } from 'react';
 import { XMarkIcon } from '@heroicons/react/24/solid';
 import { ProfileMenuProps } from '@modules/common/types/types-interfaces';

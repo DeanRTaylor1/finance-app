@@ -5,6 +5,8 @@ import DoRequest from '@modules/common/hooks/do-request';
 import Formerrors from './Form-Errors';
 import Input from './Input';
 
+import GoogleButton from 'react-google-button';
+
 const LoginForm: React.FC = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -27,6 +29,27 @@ const LoginForm: React.FC = () => {
     e.preventDefault();
 
     doRequest();
+  };
+
+  const redirectToGoogle = async () => {
+    console.log(`${process.env.NEXT_PUBLIC_API_URL}api/login/google`);
+    let timer: NodeJS.Timer | null = null;
+    const googleLoginURL = `${process.env.NEXT_PUBLIC_API_URL}api/login/google`;
+    const newWindow = window.open(
+      googleLoginURL,
+      '_blank',
+      'width=500, height=600'
+    );
+    if (newWindow) {
+      timer = setInterval(() => {
+        if (newWindow.closed) {
+          if (timer) {
+            clearInterval(timer);
+          }
+          Router.push('/');
+        }
+      }, 500);
+    }
   };
   return (
     <div className='w-full h-full flex mt-14 items-start justify-center z-10'>
@@ -55,7 +78,14 @@ const LoginForm: React.FC = () => {
             value={password}
           />
           <button className='signInButton'>Sign In</button>
+          <div className='w-full flex justify-center items-center font-light text-xs'>
+            OR
+          </div>
+          <div className='flex justify-center items-center w-full pb-4'>
+            <GoogleButton type='light' onClick={redirectToGoogle} />
+          </div>
         </div>
+
         <div className='flex font-light text-xs py-3 gap-2'>
           Don&apos;t have an account?
           <Link

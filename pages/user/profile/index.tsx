@@ -1,4 +1,4 @@
-import ProfilePage from '@modules/common/components/Fragments/profile-page';
+import ProfilePage from '@modules/common/components/Fragments/profile/profile-page';
 import LoadingCircle from '@modules/common/components/loadingbar/loading-circle';
 import {
   color,
