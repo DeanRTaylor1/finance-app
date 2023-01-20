@@ -5,7 +5,7 @@ export type DashBoardBoxProps = {
 
 const DashBoardBox: React.FC<DashBoardBoxProps> = ({ title, value }) => {
   return (
-    <div className='w-full md:w-[18rem] bg-white aspect-video rounded-md flex flex-col p-4 border-t-8 border-blue-500 border border-b-black border-r-black border-l-black shadow-md '>
+    <div className='w-full md:w-[18rem] bg-white aspect-video rounded-md flex flex-col p-4 border-t-8 border-blue-500 shadow-md '>
       <span className='font-bold text-xl flex justify-center items-center'>
         {title}
       </span>

@@ -42,21 +42,22 @@ const TableRow: React.FC<ExpenseTableRowProps> = ({
   return (
     <Fragment>
       <tr>
-        <td className='px-4 py-2 text-xs md:text-sm font-extralight md:font-bold text-gray-800 whitespace-nowrap max-w-fit'>
+        <td className='px-4 py-2 text-xs md:text-sm font-extralight md:font-bold text-gray-800 whitespace-nowrap '>
           {expense.item}
         </td>
-        <td className='px-4 py-2 text-xs md:text-sm font-extralight md:font-bold text-gray-800 whitespace-nowrap max-w-fit'>
+        <td className='px-4 py-2 text-xs md:text-sm font-extralight md:font-bold text-gray-800 whitespace-nowrap '>
           {numberWithCommas(expense.cost)}
         </td>
-        <td className='px-4 py-2 text-xs md:text-sm font-extralight md:font-bold text-gray-800 whitespace-nowrap max-w-fit'>
+        <td className='px-4 py-2 text-xs md:text-sm font-extralight md:font-bold text-gray-800 whitespace-nowrap '>
           {expense.tag}
         </td>
-        <td className='px-4 py-2 text-xs md:text-sm font-extralight md:font-bold text-gray-800 whitespace-nowrap max-w-fit'>
-          <a className='text-green-500 hover:text-green-700' href='#'>
-            {format(new Date(expense.dateSpent), 'dd/MM/yy')}
-          </a>
+        <td className='px-4 py-2 text-xs md:text-sm font-extralight md:font-bold text-gray-800 whitespace-nowrap '>
+          <p className='text-green-500 hover:text-green-700 w-full text-left' >
+          {format(new Date(expense.dateSpent), 'dd/MM/yy')}
+          </p>
+          
         </td>
-        <td className='px-4 py-2 text-xs md:text-sm font-extralight md:font-bold text-gray-800 whitespace-nowrap max-w-fit'>
+        <td className='px-4 py-2 text-xs md:text-sm font-extralight md:font-bold text-gray-800 whitespace-nowrap text-right'>
           <a
             className='text-red-500 hover:text-red-700'
             href='#'

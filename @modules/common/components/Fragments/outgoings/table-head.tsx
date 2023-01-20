@@ -4,10 +4,7 @@ import {
 } from '@modules/common/types/types-interfaces';
 import { Fragment } from 'react';
 
-type TableRowProps = {
-  outgoing: OutgoingRecord;
-  currentUser: currentUserProps;
-};
+
 
 const TableHead: React.FC = () => {
   return (

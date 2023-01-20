@@ -53,19 +53,13 @@ interface useRequest {
   onSuccess: (data?: any) => void;
 }
 
-type currentUser = {
-  id: string;
-  email: string;
-  iat: number;
-  exp: number;
-};
 
 interface CustomPropsWithChildren extends PropsWithChildren {
   currentUser?: currentUserProps;
 }
 
 interface PropsWithAuth {
-  currentUser: currentUser;
+  currentUser: currentUserProps;
 }
 
 interface FormerrorsProps {
@@ -114,6 +108,8 @@ type profileState = {
   currency: string;
   phone: string;
   savingsTarget: number;
+  savingsRate: number;
+  currentSavings: number;
 };
 
 type profileUpdateActionType = {
@@ -126,7 +122,9 @@ type profileUpdateActionTypeKey =
   | 'monthlySalary'
   | 'currency'
   | 'phone'
-  | 'savingsTarget';
+  | 'savingsTarget'
+  | 'savingsRate'
+  | 'currentSavings';
 
 type userDataItem = {
   name: string;
@@ -167,7 +165,6 @@ export type {
   Methods,
   useRequest,
   CustomPropsWithChildren,
-  currentUser,
   PropsWithAuth,
   FormerrorsProps,
   ArticleContainerProps,

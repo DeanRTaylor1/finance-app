@@ -4,10 +4,7 @@ import {
 } from '@modules/common/types/types-interfaces';
 import { Fragment } from 'react';
 
-type TableRowProps = {
-  outgoing: OutgoingRecord;
-  currentUser: currentUserProps;
-};
+
 
 const TableHead: React.FC = () => {
   return (
@@ -34,7 +31,7 @@ const TableHead: React.FC = () => {
           </th>
           <th
             scope='col'
-            className='px-4 py-2 text-xs font-bold text-right text-gray-500 uppercase '
+            className='px-4 py-2 text-xs font-bold text-left text-gray-500 uppercase '
           >
             Date
           </th>

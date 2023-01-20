@@ -70,9 +70,8 @@ const ProfilePage: React.FC<any> = ({ currentUser }) => {
   return (
     <div className=' max-w-[calc(900px)] w-[90vw] h-[calc(85vh)] flex mt-14 items-start justify-center z-10'>
       <div
-        className={`h-fit w-[95%] flex flex-col gap-4 min-h-fit bg-white  rounded-md px-8 py-4 text-xl font-bold ${
-          confirmDeleteModalActive ? 'filter blur-md' : ''
-        }`}
+        className={`h-fit w-[95%] flex flex-col gap-4 min-h-fit bg-white  rounded-md px-8 py-4 text-xl font-bold ${confirmDeleteModalActive ? 'filter blur-md' : ''
+          }`}
       >
         <div className='py-4 h-20 flex justify-between underline underline-offset-4 font-extrabold '>
           {currentUser.username}
@@ -90,7 +89,8 @@ const ProfilePage: React.FC<any> = ({ currentUser }) => {
               (item) =>
                 item.name !== 'Created At' &&
                 item.name !== 'Updated At' &&
-                item.name !== 'Username'
+                item.name !== 'Username' &&
+                item.name !== 'Savings Rate'
             )
             .map((item, index) => {
               return (
@@ -107,6 +107,27 @@ const ProfilePage: React.FC<any> = ({ currentUser }) => {
                 </div>
               );
             })}
+        {!isLoading &&
+          userData &&
+          userData
+            .filter(
+              (item) =>
+                item.name === 'Savings Rate'
+            )
+            .map((item, index) => {
+              return (
+                <div
+                  key={index}
+                  className='p-2 border-b border-dashed border-slate-200 flex flex-col gap-2'
+                >
+                  {item.name}:{' '}
+                  <div className='font-extralight text-lg'>
+                  {`${item.value}%`} 
+                  </div>
+                </div>
+              );
+            })}
+
         {!isLoading && (
           <Link href='/user/profile/update'>
             {' '}

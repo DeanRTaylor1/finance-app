@@ -23,7 +23,7 @@ const Navbar: React.FC<CustomPropsWithChildren> = ({ currentUser }) => {
             onClick={(e) => mobileNavHandler(e, 'button')}
             className='navButton'
             key={href}
-          >
+         >
             {label}
           </button>
         </Link>

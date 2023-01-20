@@ -15,7 +15,7 @@ const AddItemForm: React.FC<any> = ({
   const [itemName, setItemName] = useState('');
   const [tag, setTag] = useState('');
   const [cost, setCost] = useState('');
-  const [currency, setCurrency] = useState('');
+  const [currency, setCurrency] = useState('usd');
   const [date, setDate] = useState(new Date());
 
   const { doRequest, errors } = DoRequest({

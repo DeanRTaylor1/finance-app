@@ -3,9 +3,13 @@ var year = new Date().getFullYear();
 var month = new Date().getMonth();
 
 
-const getWeeklySavings = (monthlySalary: number, monthlyOutgoings: number) => {
+const getWeeklySavings = (monthlySalary: number, monthlyOutgoings: number, savingsRate?: number) => {
   const freeCash = monthlySalary - monthlyOutgoings;
   const days = daysInMonth(year, month)
+  if (savingsRate) {
+    console.log(savingsRate)
+    return Math.floor(((freeCash / days) * 7) * (savingsRate / 100))
+  }
 
   return Math.floor((freeCash / days) * 7)
 
@@ -23,4 +27,22 @@ const getDailySpend = (totalOutgoings: number) => {
   return Math.floor(totalOutgoings / days);
 }
 
-export { getWeeklySavings, getDailySpend }
+
+const targetDailySpend = (monthlySalary: number, monthlyOutgoings: number, savingsRate: number,) => {
+  const freeCash = monthlySalary - monthlyOutgoings;
+  const days = daysInMonth(year, month)
+
+  return (Math.floor(((freeCash * (1 - (savingsRate / 100))) / days)) + Math.floor((monthlyOutgoings / days)))
+
+
+}
+
+const daysUntilTarget = (monthlySalary: number, monthlyOutgoings: number, savingsRate: number, savingsTarget: number, currentSavings:number = 0) => {
+  console.log(monthlySalary, monthlyOutgoings, savingsRate, savingsTarget)
+  const freeCash = monthlySalary - monthlyOutgoings;
+  const monthlySavings = freeCash * (savingsRate / 100)
+  console.log(Math.floor(savingsTarget / (monthlySavings / 30)))
+  return Math.floor((savingsTarget - currentSavings) / (monthlySavings / 30))
+}
+
+export { getWeeklySavings, getDailySpend, targetDailySpend, daysUntilTarget }
