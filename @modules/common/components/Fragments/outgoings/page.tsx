@@ -1,18 +1,16 @@
 import axios from 'axios';
 import { useEffect, useState } from 'react';
 import {
-  currentUserProps,
   OutgoingRecord,
+  PropsWithAuth,
 } from '@modules/common/types/types-interfaces';
 import TableHead from './table-head';
 import TableRow from './table-row';
-import Input from '../../Form/Input';
-import Formerrors from '../../Form/Form-Errors';
 import AddItemForm from './add-item-form';
 import LoadingCircle from '../../loadingbar/loading-circle';
 import { ArrowRightIcon, ArrowLeftIcon } from '@heroicons/react/24/solid';
 
-const OutgoingsPage: React.FC<any> = ({ currentUser }) => {
+const OutgoingsPage: React.FC<PropsWithAuth> = ({ currentUser }) => {
   const [isLoading, setIsLoading] = useState<Boolean>(true);
   const [userOutgoings, setUserOutgoings] = useState<OutgoingRecord[]>([
     {} as OutgoingRecord,
@@ -72,7 +70,7 @@ const OutgoingsPage: React.FC<any> = ({ currentUser }) => {
         <div className='flex flex-col'>
           <div className='overflow-x-auto'>
             <div className='p-1.5 w-full inline-block align-middle'>
-              <div className='overflow-x-hidden md:overflow-hidden border rounded-lg'>
+              <div className='overflow-x-scroll md:overflow-hidden border rounded-lg'>
                 <table className='min-w-full divide-y divide-gray-200'>
                   <TableHead />
                   <tbody className='divide-y divide-gray-200 font-medium'>

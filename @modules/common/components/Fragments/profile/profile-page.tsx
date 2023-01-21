@@ -1,16 +1,13 @@
-import { Fragment, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import {
-  currentUserProps,
   userProfileData,
   userStateData,
 } from '@modules/common/types/types-interfaces';
-import DoRequests from '@modules/common/hooks/do-request';
 import axios from 'axios';
 import { toNormalCase } from '@modules/common/utils/utility-functions';
 import Link from 'next/link';
 import { numberWithCommas } from '@modules/common/utils/number-with-comma';
 import LoadingCircle from '../../loadingbar/loading-circle';
-import DoRequest from '@modules/common/hooks/do-request';
 import Router from 'next/router';
 import DeleteUserModal from './Delete-User-Modal';
 
@@ -70,8 +67,9 @@ const ProfilePage: React.FC<any> = ({ currentUser }) => {
   return (
     <div className=' max-w-[calc(900px)] w-[90vw] h-[calc(85vh)] flex mt-14 items-start justify-center z-10'>
       <div
-        className={`h-fit w-[95%] flex flex-col gap-4 min-h-fit bg-white  rounded-md px-8 py-4 text-xl font-bold ${confirmDeleteModalActive ? 'filter blur-md' : ''
-          }`}
+        className={`h-fit w-[95%] flex flex-col gap-4 min-h-fit bg-white  rounded-md px-8 py-4 text-xl font-bold ${
+          confirmDeleteModalActive ? 'filter blur-md' : ''
+        }`}
       >
         <div className='py-4 h-20 flex justify-between underline underline-offset-4 font-extrabold '>
           {currentUser.username}
@@ -110,10 +108,7 @@ const ProfilePage: React.FC<any> = ({ currentUser }) => {
         {!isLoading &&
           userData &&
           userData
-            .filter(
-              (item) =>
-                item.name === 'Savings Rate'
-            )
+            .filter((item) => item.name === 'Savings Rate')
             .map((item, index) => {
               return (
                 <div
@@ -122,7 +117,7 @@ const ProfilePage: React.FC<any> = ({ currentUser }) => {
                 >
                   {item.name}:{' '}
                   <div className='font-extralight text-lg'>
-                  {`${item.value}%`} 
+                    {`${item.value}%`}
                   </div>
                 </div>
               );

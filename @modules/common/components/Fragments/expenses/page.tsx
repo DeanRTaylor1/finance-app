@@ -1,19 +1,17 @@
 import axios from 'axios';
 import { useEffect, useState } from 'react';
 import {
-  currentUserProps,
   ExpenseRecord,
-  OutgoingRecord,
+  PropsWithAuth,
 } from '@modules/common/types/types-interfaces';
 import TableHead from './table-head';
 import TableRow from './table-row';
-import Input from '../../Form/Input';
-import Formerrors from '../../Form/Form-Errors';
+
 import AddItemForm from './add-item-form';
 import LoadingCircle from '../../loadingbar/loading-circle';
 import { ArrowRightIcon, ArrowLeftIcon } from '@heroicons/react/24/solid';
 
-const ExpensesPage: React.FC<any> = ({ currentUser }) => {
+const ExpensesPage: React.FC<PropsWithAuth> = ({ currentUser }) => {
   const [isLoading, setIsLoading] = useState<Boolean>(true);
   const [userExpenses, setUserExpenses] = useState<ExpenseRecord[]>([
     {} as ExpenseRecord,
@@ -51,7 +49,7 @@ const ExpensesPage: React.FC<any> = ({ currentUser }) => {
     switch (task) {
       case 'increase':
         if (totalRecordsCount <= page * 10) {
-          return //console.log(totalRecordsCount);
+          return; //console.log(totalRecordsCount);
         }
         setPage(page + 1);
       case 'decrease':

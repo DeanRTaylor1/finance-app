@@ -96,7 +96,7 @@ export default function Home({ currentUser }: any) {
         </div>
 
         <div className='h-fit w-screen bg-white flex gap-8 md:gap-32 items-center justify-center '>
-          <div className='w-[100%] h-fit relative p-10 flex flex-col md:flex-row-reverse justify-center items-center gap-4'>
+          <div className='w-[100%] h-fit relative p-10 flex flex-col-reverse md:flex-row-reverse justify-center items-center gap-4'>
             <div className='flex justify-center items-center  '>
               <Image alt='graph' src={'/graph.png'} width={450} height={450} />
             </div>

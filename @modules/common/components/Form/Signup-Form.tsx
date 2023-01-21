@@ -1,8 +1,8 @@
 import Router from 'next/router';
-import { useEffect, useState } from 'react';
-import { useForm, SubmitHandler } from 'react-hook-form';
+import { useState } from 'react';
+import { useForm } from 'react-hook-form';
 import DoRequest from '../../hooks/do-request';
-import Logo from '../Fragments/Logo';
+
 import Formerrors from './Form-Errors';
 
 type FormData = {

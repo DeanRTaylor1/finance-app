@@ -1,4 +1,3 @@
-import { color } from '@modules/common/types/types-interfaces';
 import Link from 'next/link';
 import Router, { useRouter } from 'next/router';
 import { Fragment, useEffect, useState } from 'react';

@@ -119,7 +119,7 @@ const LoginForm: React.FC = () => {
           />
           <button className='signInButton'>Sign In</button>
           <div className='w-full flex justify-center items-center font-light text-xs'>
-            OR
+            Or get started with:
           </div>
           <div className='flex justify-center items-center w-full pb-4 gap-4'>
             <FcGoogle
@@ -141,7 +141,7 @@ const LoginForm: React.FC = () => {
         </div>
 
         <div className='flex font-light text-xs py-3 gap-2'>
-          Don&apos;t have an account?
+          Don&apos;t use social media?
           <Link
             className='font-bold text-xs text-blue-300'
             href={'/auth/signup'}

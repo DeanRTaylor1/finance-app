@@ -1,7 +1,12 @@
 import { XMarkIcon } from '@heroicons/react/24/solid';
 import { PropsWithChildren } from 'react';
 
-const StockContainer: React.FC<any> = (props) => {
+interface StockContainerProps extends PropsWithChildren {
+  deleteHandler: (code: string) => void;
+  code: string;
+}
+
+const StockContainer: React.FC<StockContainerProps> = (props) => {
   const { deleteHandler, code } = props;
   return (
     <div className='relative z-10 bg-white w-full aspect-video max-w-[900px]  h-fit border  flex flex-col justify-between items-center rounded-md p-2'>

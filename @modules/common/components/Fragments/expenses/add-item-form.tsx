@@ -1,9 +1,8 @@
 import DoRequest from '@modules/common/hooks/do-request';
-import Link from 'next/link';
-import Router from 'next/router';
 import { ChangeEvent, useState } from 'react';
 import Formerrors from '../../Form/Form-Errors';
 import Input from '../../Form/Input';
+import TagsDropdown from '../tags-dropdown';
 import DatePickerComponent from './date-picker';
 
 const AddItemForm: React.FC<any> = ({
@@ -13,7 +12,7 @@ const AddItemForm: React.FC<any> = ({
   getCount,
 }) => {
   const [itemName, setItemName] = useState('');
-  const [tag, setTag] = useState('');
+  const [tag, setTag] = useState('housing');
   const [cost, setCost] = useState('');
   const [currency, setCurrency] = useState('usd');
   const [date, setDate] = useState(new Date());
@@ -39,7 +38,7 @@ const AddItemForm: React.FC<any> = ({
   const getItemName = (e: React.FormEvent<HTMLInputElement>) => {
     setItemName(e.currentTarget.value);
   };
-  const getTag = (e: React.FormEvent<HTMLInputElement>) => {
+  const getTag = (e: React.FormEvent<HTMLSelectElement>) => {
     setTag(e.currentTarget.value);
   };
   const getCost = (e: React.FormEvent<HTMLInputElement>) => {
@@ -70,11 +69,11 @@ const AddItemForm: React.FC<any> = ({
   };
 
   return (
-    <div className='w-screen h-screen fixed -top-40 left-0 bg-transparent flex flex-col items-center justify-center '>
-      <div className='h-96 w-96  rounded-md shadow-2xl flex flex-col'>
+    <div className='w-screen h-screen fixed -top-36 left-0 bg-transparent flex flex-col items-center justify-center z-50 '>
+      <div className='h-96 w-72 rounded-md shadow-2xl flex flex-col z-50'>
         <form
           onSubmit={formSubmitHandler}
-          className='h-fit w-96 flex flex-col shadow-2xl bg-white  rounded-md px-8 py-4 text-xl font-bold'
+          className='h-fit w-full flex flex-col shadow-2xl bg-white  rounded-md px-8 py-4 text-xl font-bold'
         >
           <div className='py-4 h-20 flex justify-between'>
             Add Item <Formerrors errors={errors} />
@@ -88,14 +87,7 @@ const AddItemForm: React.FC<any> = ({
               getInputs={getItemName}
               value={itemName}
             />
-            <Input
-              name={'Tag:'}
-              label={'tag'}
-              type={'text'}
-              placeholder={'Item Tag'}
-              getInputs={getTag}
-              value={tag}
-            />
+            <TagsDropdown tag={tag} getTag={getTag} />
             <Input
               name={'Cost:'}
               label={'itemCost'}

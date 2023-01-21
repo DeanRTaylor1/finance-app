@@ -1,6 +1,5 @@
 import { Fragment } from 'react';
 import { FormerrorsProps } from '@modules/common/types/types-interfaces';
-import Logo from '../Fragments/Logo';
 import uniqid from 'uniqid';
 import FormLogo from '../Fragments/Form-Logo';
 

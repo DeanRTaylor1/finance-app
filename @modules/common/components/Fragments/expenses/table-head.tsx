@@ -1,10 +1,4 @@
-import {
-  currentUserProps,
-  OutgoingRecord,
-} from '@modules/common/types/types-interfaces';
 import { Fragment } from 'react';
-
-
 
 const TableHead: React.FC = () => {
   return (

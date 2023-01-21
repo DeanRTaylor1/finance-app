@@ -52,7 +52,6 @@ const DashboardBarChartTags: React.FC<any> = ({ tagData }) => {
           }),
         borderColor: 'rgb(96,165,250)',
         backgroundColor: 'rgba(96,165,250, 0.7)',
-        
       },
     ],
   };

@@ -1,6 +1,5 @@
-import { Fragment, useEffect, useState, useReducer } from 'react';
+import { useEffect, useState, useReducer } from 'react';
 import {
-  currentUserProps,
   profileState,
   profileUpdateActionTypeKey,
   PropsWithAuth,
@@ -22,7 +21,7 @@ const initialState: profileState = {
   phone: '',
   savingsTarget: 0,
   savingsRate: 50,
-  currentSavings: 0
+  currentSavings: 0,
 };
 
 const UpdateProfile: React.FC<PropsWithAuth> = ({ currentUser }) => {
@@ -80,7 +79,7 @@ const UpdateProfile: React.FC<PropsWithAuth> = ({ currentUser }) => {
     getUserData(currentUser.email);
   }, []);
 
-  useEffect(() => { }, []);
+  useEffect(() => {}, []);
 
   const onSubmit = () => {
     /* console.log({
@@ -89,25 +88,24 @@ const UpdateProfile: React.FC<PropsWithAuth> = ({ currentUser }) => {
       phone: state.phone,
       savingsTarget: state.savingsTarget,
     }); */
-    console.log(state.currentSavings)
+    console.log(state.currentSavings);
     doRequest();
   };
 
   const checkSliderColor = (savingsRate: number) => {
     if (savingsRate < 50) {
-      setSliderColor('accent-emerald-400')
+      setSliderColor('accent-emerald-400');
     } else if (savingsRate < 70) {
-      setSliderColor('accent-yellow-400')
+      setSliderColor('accent-yellow-400');
     } else {
-      setSliderColor('accent-red-400')
+      setSliderColor('accent-red-400');
     }
-  }
+  };
   const handleSliderChange = (value: number) => {
-    console.log(value)
-    checkSliderColor(value)
-    dispatch({ type: 'UPDATE', value: value.toString(), key: 'savingsRate' })
-
-  }
+    console.log(value);
+    checkSliderColor(value);
+    dispatch({ type: 'UPDATE', value: value.toString(), key: 'savingsRate' });
+  };
   return (
     <div className='max-w-[calc(900px)] w-[90vw] h-[calc(85vh)] flex mt-14 items-start justify-center z-10'>
       <div className='h-fit w-[95%] flex flex-col gap-4  bg-white  rounded-md px-8 py-4 text-xl font-bold'>
@@ -191,14 +189,23 @@ const UpdateProfile: React.FC<PropsWithAuth> = ({ currentUser }) => {
 
         <div className='p-2 border-b border-dashed border-slate-200 flex flex-col gap-2'>
           <span>{`Savings rate: ${state.savingsRate}%`}</span>
-          <input className={sliderColor} type={'range'} min={'30'} max={"90"} step={'10'} onChange={(e) => handleSliderChange(+e.target.value)} value={state.savingsRate} />
+          <input
+            className={sliderColor}
+            type={'range'}
+            min={'30'}
+            max={'90'}
+            step={'10'}
+            onChange={(e) => handleSliderChange(+e.target.value)}
+            value={state.savingsRate}
+          />
         </div>
         <button className='signInButton' onClick={onSubmit}>
           Submit
         </button>
         <button
           className='signInButton bg-red-600 hover:bg-red-800 focus:bg-red-800'
-          onClick={() => Router.push('/user/profile')}>
+          onClick={() => Router.push('/user/profile')}
+        >
           Cancel
         </button>
       </div>

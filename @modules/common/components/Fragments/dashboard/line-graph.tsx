@@ -8,11 +8,12 @@ import {
   Title,
   Tooltip,
   Legend,
+  ChartOptions,
 } from 'chart.js';
 import { Line } from 'react-chartjs-2';
 import getDatesInRange from '@modules/common/utils/get-dates-in-range';
 import { format } from 'date-fns';
-import annotationPlugin from "chartjs-plugin-annotation";
+import annotationPlugin from 'chartjs-plugin-annotation';
 
 ChartJS.register(
   CategoryScale,
@@ -30,7 +31,7 @@ const DashboardChart: React.FC<any> = ({
   startDate,
   endDate,
   dailySpend,
-  targetDailySpend
+  targetDailySpend,
 }) => {
   const [dates, setDates] = useState<any[]>([]);
 
@@ -68,19 +69,19 @@ const DashboardChart: React.FC<any> = ({
     matchDates(dates, dailySpend);
   }, []);
 
-  const options = {
+  const options: ChartOptions & { annotation?: any } = {
     responsive: true,
     plugins: {
       annotation: {
         annotations: {
           line1: {
             type: 'line',
-            yMin: targetDailySpend,
-            yMax: targetDailySpend,
+            yMin: +targetDailySpend,
+            yMax: +targetDailySpend,
             borderColor: 'rgb(255, 99, 132)',
-            borderWidth: 2
-          }
-        }
+            borderWidth: 2,
+          },
+        },
       },
       legend: {
         position: 'top' as const,

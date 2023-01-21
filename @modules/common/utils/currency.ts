@@ -1,14 +1,12 @@
 const getCurrencySymbol = (currency: string) => {
   switch (currency) {
     case 'vnd':
-      return '₫'
+      return '₫';
     case 'usd':
-      return '$'
+      return '$';
     case 'gbp':
-      return '£' 
-
+      return '£';
   }
-}
+};
 
-
-export { getCurrencySymbol }
+export { getCurrencySymbol };

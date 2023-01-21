@@ -1,24 +1,23 @@
-
-import {
-  userProfileData,
-  userStateData,
-} from '@modules/common/types/types-interfaces';
+import { PropsWithAuth } from '@modules/common/types/types-interfaces';
 import { getCurrencySymbol } from '@modules/common/utils/currency';
-import { getDailySpend, getWeeklySavings, targetDailySpend } from '@modules/common/utils/math';
+import {
+  getDailySpend,
+  getWeeklySavings,
+  targetDailySpend,
+} from '@modules/common/utils/math';
 import { numberWithCommas } from '@modules/common/utils/number-with-comma';
-import { toNormalCase } from '@modules/common/utils/utility-functions';
 import axios from 'axios';
 import Router from 'next/router';
 import { Fragment, useEffect, useState } from 'react';
 import LoadingCircle from '../../loadingbar/loading-circle';
 import DatePickerComponent from '../expenses/date-picker';
 import DashboardBarChartTags from '../dashboard/bar-chart-tags';
-import DashBoardBox, { DashBoardBoxProps } from '../dashboard/dashboard-box';
-import DashboardChartContainer from '../dashboard/dashboard-chart-container'
+import DashBoardBox from '../dashboard/dashboard-box';
+import DashboardChartContainer from '../dashboard/dashboard-chart-container';
 import DonutChart from '../dashboard/donut-chart';
 import DashboardChart from '../dashboard/line-graph';
 
-const SavingsPage: React.FC<any> = ({ currentUser }) => {
+const SavingsPage: React.FC<PropsWithAuth> = ({ currentUser }) => {
   const [isLoading, setIsLoading] = useState<Boolean>(true);
   const [userData, setUserData] = useState<any>(null);
   const [startDate, setStartDate] = useState<Date>(
@@ -60,23 +59,29 @@ const SavingsPage: React.FC<any> = ({ currentUser }) => {
     };
   }, [startDate, endDate, currentUser.email]);
 
- 
-
   const savingsItems = [
     userData && {
       title: 'Target Weekly Savings',
       value: `${getCurrencySymbol(userData.currency)}${numberWithCommas(
-        getWeeklySavings(userData.monthlySalary, userData.total, userData.savingsRate)
+        getWeeklySavings(
+          userData.monthlySalary,
+          userData.total,
+          userData.savingsRate
+        )
       )}`,
     },
     userData && {
       title: 'Target Daily Spend',
       value: `${getCurrencySymbol(userData.currency)}${numberWithCommas(
-        targetDailySpend(userData.monthlySalary, userData.total, userData.savingsRate)
+        targetDailySpend(
+          userData.monthlySalary,
+          userData.total,
+          userData.savingsRate
+        )
       )}`,
     },
   ]
-    .filter(Boolean) 
+    .filter(Boolean)
     .map((headline, index) => {
       return (
         <DashBoardBox
@@ -96,9 +101,14 @@ const SavingsPage: React.FC<any> = ({ currentUser }) => {
           <div className='w-full flex gap-8 flex-wrap items-center justify-center md:justify-between'>
             <div className='w-full md:w-[18rem] md:h-[190px] bg-white aspect-video rounded-md flex flex-col justify-center items-center p-4 border-t-8 border-blue-500 border border-b-black border-r-black border-l-black shadow-md'>
               <div className='font-bold text-xl'>Breakdown</div>
-              {userData && <DonutChart currencySymbol={getCurrencySymbol(userData.currency)} outgoingsSum={userData.outgoingsSum} />}
+              {userData && (
+                <DonutChart
+                  currencySymbol={getCurrencySymbol(userData.currency)}
+                  outgoingsSum={userData.outgoingsSum}
+                />
+              )}
             </div>
-            {userData && savingsItems }
+            {userData && savingsItems}
           </div>
           <div className='h-18 w-full bg-white p-4  mr-6 ml-6 border-t-8 border-blue-500 flex flex-col md:flex-row justify-between items-center gap-4 font-bold border border-b-black border-r-black border-l-black shadow-md rounded-sm'>
             <span className='flex gap-2 items-center w-full justify-center'>

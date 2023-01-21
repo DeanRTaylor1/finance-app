@@ -7,6 +7,7 @@ import { Fragment, useState } from 'react';
 import axios from 'axios';
 import Router from 'next/router';
 import { numberWithCommas } from '@modules/common/utils/number-with-comma';
+import { getCurrencySymbol } from '@modules/common/utils/currency';
 
 type TableRowProps = {
   outgoing: OutgoingRecord;
@@ -33,13 +34,13 @@ const TableRow: React.FC<TableRowProps> = ({
   return (
     <Fragment>
       <tr>
-        <td className='px-4 py-2 text-sm font-bold text-gray-800 whitespace-nowrap'>
+        <td className='px-4 py-2 text-xs md:text-sm font-extralight md:font-bold text-gray-800 whitespace-normal '>
           {outgoing.item}
         </td>
-        <td className='px-4 py-2 text-sm font-bold text-gray-800 whitespace-nowrap'>
-          {numberWithCommas(outgoing.cost)}
+        <td className='px-4 py-2 text-xs md:text-sm font-extralight md:font-bold text-gray-800 whitespace-normal '>
+          {`${getCurrencySymbol(outgoing.currency)}${numberWithCommas(outgoing.cost)}`}
         </td>
-        <td className='px-4 py-2 text-sm font-bold text-gray-800 whitespace-nowrap'>
+        <td className='px-4 py-2 text-xs md:text-sm font-extralight md:font-bold text-gray-800 whitespace-normal '>
           {outgoing.tag}
         </td>
         {/* <td className="px-4 py-2 text-sm font-medium text-right whitespace-nowrap">
@@ -52,7 +53,7 @@ const TableRow: React.FC<TableRowProps> = ({
 
           </td> */}
 
-        <td className='px-4 py-2 text-sm font-medium text-right whitespace-nowrap'>
+        <td className='px-4 py-2 text-xs md:text-sm font-extralight md:font-bold text-gray-800 whitespace-normal text-right'>
           <a
             className='text-red-500 hover:text-red-700'
             href='#'

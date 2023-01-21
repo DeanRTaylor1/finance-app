@@ -1,11 +1,11 @@
-import {
-  userProfileData,
-  userStateData,
-} from '@modules/common/types/types-interfaces';
 import { getCurrencySymbol } from '@modules/common/utils/currency';
-import { daysUntilTarget, getDailySpend, getWeeklySavings, targetDailySpend } from '@modules/common/utils/math';
+import {
+  daysUntilTarget,
+  getDailySpend,
+  getWeeklySavings,
+  targetDailySpend,
+} from '@modules/common/utils/math';
 import { numberWithCommas } from '@modules/common/utils/number-with-comma';
-import { toNormalCase } from '@modules/common/utils/utility-functions';
 import axios from 'axios';
 import Router from 'next/router';
 import { Fragment, useEffect, useState } from 'react';
@@ -59,13 +59,11 @@ const DashboardPage: React.FC<any> = ({ currentUser }) => {
     };
   }, [startDate, endDate, currentUser.email]);
 
-
-
   const headlineItems = [
     userData && {
       title: 'Weekly Max Savings',
       value: `${getCurrencySymbol(userData.currency)}${numberWithCommas(
-        getWeeklySavings(userData.monthlySalary, userData.total)
+        getWeeklySavings(userData.monthlySalary, userData.totalOutgoings)
       )}`,
     },
     userData && {
@@ -90,21 +88,37 @@ const DashboardPage: React.FC<any> = ({ currentUser }) => {
     userData && {
       title: 'Target Weekly Savings',
       value: `${getCurrencySymbol(userData.currency)}${numberWithCommas(
-        getWeeklySavings(userData.monthlySalary, userData.total, userData.savingsRate)
+        getWeeklySavings(
+          userData.monthlySalary,
+          userData.totalOutgoings,
+          userData.savingsRate
+        )
       )}`,
     },
     userData && {
-      title: `Days until ${getCurrencySymbol(userData.currency)}${userData.savingsTarget}`,
+      title: `Days until ${getCurrencySymbol(userData.currency)}${
+        userData.savingsTarget
+      }`,
       value: `${numberWithCommas(
-        daysUntilTarget(+userData.monthlySalary, +userData.totalOutgoings, +userData.savingsRate, +userData.savingsTarget, +userData.currentSavings)
-      )}`,
-    }, userData && {
-      title: 'Target Daily Spend',
-      value: `${getCurrencySymbol(userData.currency)}${numberWithCommas(
-        targetDailySpend(userData.monthlySalary, userData.total, userData.savingsRate)
+        daysUntilTarget(
+          +userData.monthlySalary,
+          +userData.totalOutgoings,
+          +userData.savingsRate,
+          +userData.savingsTarget,
+          +userData.currentSavings
+        )
       )}`,
     },
-
+    userData && {
+      title: 'Target Daily Spend',
+      value: `${getCurrencySymbol(userData.currency)}${numberWithCommas(
+        targetDailySpend(
+          userData.monthlySalary,
+          userData.totalOutgoings,
+          userData.savingsRate
+        )
+      )}`,
+    },
   ]
     .filter(Boolean)
     .map((headline, index) => {
@@ -117,7 +131,6 @@ const DashboardPage: React.FC<any> = ({ currentUser }) => {
       );
     });
 
-
   return (
     <div className='h-fit p-8 min-h-[calc(90vh)]  max-w-[1000px] flex flex-col gap-8 justify-start items-center w-[100%]'>
       <div className='font-extrabold text-2xl'>Dashboard</div>
@@ -127,13 +140,18 @@ const DashboardPage: React.FC<any> = ({ currentUser }) => {
           <div className='w-full flex gap-8 flex-wrap items-center justify-center md:justify-between'>
             <div className='w-full md:w-[18rem] md:h-[190px] bg-white aspect-video rounded-md flex flex-col justify-center items-center p-4 border-t-8 border-blue-500 shadow-md'>
               <div className='font-bold text-xl'>Breakdown</div>
-              {userData && <DonutChart currencySymbol={getCurrencySymbol(userData.currency)} outgoingsSum={userData.outgoingsSum} />}
+              {userData && (
+                <DonutChart
+                  currencySymbol={getCurrencySymbol(userData.currency)}
+                  outgoingsSum={userData.outgoingsSum}
+                />
+              )}
             </div>
             {userData && headlineItems}
 
             {userData && savingsItems}
           </div>
-          <div className='h-18 w-full bg-white p-4  mr-6 ml-6 border-t-8 border-blue-500 flex flex-col md:flex-row justify-between items-center gap-4 font-bold rounded-sm'>
+          <div className='h-18 w-full bg-white p-4  mr-6 ml-6 border-t-8 border-blue-500 flex flex-col md:flex-row justify-between items-center gap-4 font-bold rounded-sm shadow-md'>
             <span className='flex gap-2 items-center w-full justify-center'>
               {' '}
               <h2 className='w-[30%]'>From:</h2>{' '}
@@ -160,8 +178,11 @@ const DashboardPage: React.FC<any> = ({ currentUser }) => {
                 startDate={startDate}
                 endDate={endDate}
                 dailySpend={getDailySpend(userData.totalOutgoings)}
-                targetDailySpend={targetDailySpend(userData.monthlySalary, userData.total, userData.savingsRate)
-}
+                targetDailySpend={targetDailySpend(
+                  userData.monthlySalary,
+                  userData.total,
+                  userData.savingsRate
+                )}
               />
             )}
           </DashboardChartContainer>

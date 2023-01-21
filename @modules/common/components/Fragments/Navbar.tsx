@@ -3,11 +3,11 @@ import { Bars3Icon, UserCircleIcon } from '@heroicons/react/24/solid';
 import Logo from './Logo';
 import Mobilenav from './Mobile-Nav';
 import uniqid from 'uniqid';
-import { useContext, useState } from 'react';
-import { CustomPropsWithChildren } from '@modules/common/types/types-interfaces';
+import { useState } from 'react';
+import { PropsWithAuth } from '@modules/common/types/types-interfaces';
 import ProfileMenu from './profile/profile-menu';
 
-const Navbar: React.FC<CustomPropsWithChildren> = ({ currentUser }) => {
+const Navbar: React.FC<PropsWithAuth> = ({ currentUser }) => {
   const [scale, setScale] = useState('scale-0');
   const [profileScale, setProfileScale] = useState<string>('-right-96');
   const authItems = [
@@ -23,7 +23,7 @@ const Navbar: React.FC<CustomPropsWithChildren> = ({ currentUser }) => {
             onClick={(e) => mobileNavHandler(e, 'button')}
             className='navButton'
             key={href}
-         >
+          >
             {label}
           </button>
         </Link>

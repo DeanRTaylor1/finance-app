@@ -1,12 +1,12 @@
 import DashboardPage from '@modules/common/components/Fragments/dashboard/dashboard-page';
 import OutgoingsPage from '@modules/common/components/Fragments/outgoings/page';
 import LoadingCircle from '@modules/common/components/loadingbar/loading-circle';
-import { color } from '@modules/common/types/types-interfaces';
+import { color, PropsWithAuth } from '@modules/common/types/types-interfaces';
 import axios from 'axios';
 import Router from 'next/router';
 import { Fragment, useEffect, useState } from 'react';
 
-function Dashboard({ currentUser }: any) {
+function Dashboard({ currentUser }: PropsWithAuth) {
   const [isLoading, setIsLoading] = useState<Boolean>(true);
 
   useEffect(() => {

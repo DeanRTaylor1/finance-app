@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import Router from 'next/router';
 import { useEffect } from 'react';
 import DoRequest from '@modules/common/hooks/do-request';
@@ -18,8 +19,8 @@ const SignOut = () => {
 
   return (
     <div className='h-full w-full flex justify-center items-center'>
-    <LoadingCircle />
-s   </div>
+      <LoadingCircle />s{' '}
+    </div>
   );
 };
 

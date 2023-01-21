@@ -14,7 +14,7 @@ const Signin: React.FC<PropsWithAuth> = ({ currentUser }) => {
     if (!currentUser) {
       setIsLoading(false);
     }
-  }, []);
+  }, [currentUser]);
 
   return (
     <Fragment>
