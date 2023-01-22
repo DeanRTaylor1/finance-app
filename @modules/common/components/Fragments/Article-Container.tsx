@@ -15,6 +15,8 @@ const ArticleContainer: React.FC<ArticleContainerProps> = ({
         <a
           href={web_url}
           className=' hover:opacity-75 font-bold text-sm underline underline-offset-4'
+          target={'_blank'}
+          rel={'noreferrer'}
         >
           <ArrowTopRightOnSquareIcon className='h-4 w-4 hover' />
         </a>

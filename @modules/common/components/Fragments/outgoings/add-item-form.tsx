@@ -28,7 +28,7 @@ const AddItemForm: React.FC<any> = ({
     setItemName(e.currentTarget.value);
   };
   const getTag = (e: React.FormEvent<HTMLSelectElement>) => {
-    console.log(tag, e.currentTarget.value);
+    //console.log(tag, e.currentTarget.value);
     setTag(e.currentTarget.value);
   };
   const getCost = (e: React.FormEvent<HTMLInputElement>) => {

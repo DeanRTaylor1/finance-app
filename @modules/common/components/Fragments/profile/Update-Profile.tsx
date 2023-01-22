@@ -88,7 +88,7 @@ const UpdateProfile: React.FC<PropsWithAuth> = ({ currentUser }) => {
       phone: state.phone,
       savingsTarget: state.savingsTarget,
     }); */
-    console.log(state.currentSavings);
+    //console.log(state.currentSavings);
     doRequest();
   };
 
@@ -102,7 +102,7 @@ const UpdateProfile: React.FC<PropsWithAuth> = ({ currentUser }) => {
     }
   };
   const handleSliderChange = (value: number) => {
-    console.log(value);
+    //console.log(value);
     checkSliderColor(value);
     dispatch({ type: 'UPDATE', value: value.toString(), key: 'savingsRate' });
   };

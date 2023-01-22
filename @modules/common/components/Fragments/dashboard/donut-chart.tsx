@@ -20,7 +20,7 @@ const DonutChart: React.FC<any> = ({ outgoingsSum, currencySymbol }) => {
       {
         label: `Amount in ${currencySymbol}`,
         data: outgoingsSum.map((item: any) => {
-          console.log(currencySymbol);
+          //console.log(currencySymbol);
           return `${item.totalCost}`;
         }),
         backgroundColor: [

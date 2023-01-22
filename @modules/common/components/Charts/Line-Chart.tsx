@@ -48,13 +48,14 @@ const LineChart: React.FC<chartProps> = ({
 
   useEffect(() => {
    // console.log(stockData, stockDetails, dates);
+   console.log('rendering')
     let temp: any = [];
     for (const [key, value] of Object.entries(stockData)) {
       const item: any = value;
       temp.push(item['4. close']);
     }
     setPrices(temp);
-  }, []);
+  }, [stockData]);
 
   const options = {
     responsive: true,

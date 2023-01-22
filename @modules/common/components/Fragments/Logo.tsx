@@ -9,7 +9,7 @@ const Logo: React.FC<LogoProps> = ({
   const logoStyle = `logo ${color}`;
 
   const closeModalHandler = (e: any) => {
-    console.log('test');
+    //console.log('test');
     mobileNavHandler(e, 'button');
     mobileProfileHandler(e, 'button');
   };

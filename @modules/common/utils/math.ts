@@ -9,7 +9,7 @@ const getWeeklySavings = (
   const freeCash = monthlySalary - monthlyOutgoings;
   const days = daysInMonth(year, month);
   if (savingsRate) {
-    console.log(savingsRate);
+    //console.log(savingsRate);
     return Math.floor((freeCash / days) * 7 * (savingsRate / 100));
   }
 
@@ -48,10 +48,10 @@ const daysUntilTarget = (
   savingsTarget: number,
   currentSavings: number = 0
 ) => {
-  console.log(monthlySalary, monthlyOutgoings, savingsRate, savingsTarget);
+  //console.log(monthlySalary, monthlyOutgoings, savingsRate, savingsTarget);
   const freeCash = monthlySalary - monthlyOutgoings;
   const monthlySavings = freeCash * (savingsRate / 100);
-  console.log(Math.floor(savingsTarget / (monthlySavings / 30)));
+  //console.log(Math.floor(savingsTarget / (monthlySavings / 30)));
   return Math.floor((savingsTarget - currentSavings) / (monthlySavings / 30));
 };
 

@@ -6,6 +6,7 @@ import ArticleContainer from '@modules/common/components/Fragments/Article-Conta
 import Newsstripes from '@modules/common/components/Fragments/New-Stripes';
 import Stripes from '@modules/common/components/Fragments/Stripes';
 import LoadingCircle from '@modules/common/components/loadingbar/loading-circle';
+import { toNormalCase } from '@modules/common/utils/utility-functions';
 
 export default function News({ currentUser }: any) {
   const [articles, setArticles] = useState<Article[] | null>(null);
@@ -20,7 +21,7 @@ export default function News({ currentUser }: any) {
   }, []);
   return (
     <Fragment>
-      <div className='max-w-[calc(900px)] w-[90vw] h-full flex flex-col justify-start items-center p-12 gap-4'>
+      <div className='max-w-[1800px] w-[90vw] h-full flex flex-col justify-start items-center p-12 gap-4'>
         <h1 className='h-16 font-extrabold text-lg '>News </h1>
         <div className='flex flex-col md:flex-row md:gap-8 md:flex-wrap md:justify-center items-center w-11/12 gap-4'>
           {isLoading && (
@@ -37,7 +38,7 @@ export default function News({ currentUser }: any) {
                   abstract={article.abstract}
                   web_url={article.web_url}
                   lead_paragraph={article.lead_paragraph}
-                  news_desk={article.news_desk}
+                  news_desk={toNormalCase(article.news_desk)}
                 />
               );
             })}

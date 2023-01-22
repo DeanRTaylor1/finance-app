@@ -1,33 +1,40 @@
-import { Fragment, useEffect, useState } from 'react';
+import { Fragment, useEffect, useMemo, useState } from 'react';
 import Input from '@modules/common/components/Form/Input';
-import Router from 'next/router';
+import Router, { useRouter } from 'next/router';
 import SquareContainer from '@modules/common/components/Fragments/Square-Container';
 import PageContainer from '@modules/common/components/Fragments/Page-Container';
-import GetData from '@modules/common/components/Charts/ChartData';
+import ChartData from '@modules/common/components/Charts/ChartData';
 import StockContainer from '@modules/common/components/Fragments/Stock-Container';
 import { color } from '@modules/common/types/types-interfaces';
 import { saveToLocal } from '@modules/common/utils/save-to-local';
 import LoadingCircle from '@modules/common/components/loadingbar/loading-circle';
+import StockDropdown from '@modules/common/components/Fragments/stocks/stocks-list';
+
+const DEFAULT_STOCK = 'AAPL'
+const DEFAULT_MONTHS = 12;
+
+
+type stockChartProps = {
+      code: string,
+      months: number
+  }
+
 
 export default function Stocks({ currentUser }: any) {
   const [isLoading, setIsLoading] = useState<Boolean>(true);
-  const [stocks, setStocks] = useState<any[] | null>(null);
+  const [stocks, setStocks] = useState<stockChartProps[] | null>(null);
 
-  const [stockCode, setStockCode] = useState('');
-  const [months, setMonths] = useState(0);
+  const [stockCode, setStockCode] = useState<string>(DEFAULT_STOCK);
+  const [months, setMonths] = useState<number>(DEFAULT_MONTHS);
 
-  const getStockCode = (e: React.FormEvent<HTMLInputElement>) => {
+  const getStockCode = (e: React.FormEvent<HTMLSelectElement>) => {
+    console.log(stocks)
     setStockCode(e.currentTarget.value);
   };
 
   const getMonths = (e: React.FormEvent<HTMLInputElement>) => {
     setMonths(+e.currentTarget.value);
   };
-
-  // [
-  //   { code: 'VOO', months: 18 },
-  //   { code: 'VWRL.AS', months: 12 },
-  // ]
 
   useEffect(() => {
     if (!currentUser) {
@@ -37,43 +44,54 @@ export default function Stocks({ currentUser }: any) {
     setStocks(JSON.parse(localStocks));
 
     setIsLoading(false);
-  }, [currentUser]);
+  }, []);
 
-  const setInitialStocks = (stockCode: string, months: string) => {
+  /* const setInitialStocks = (stockCode: string, months: string) => {
     setStockCode(stockCode);
     setMonths;
-  };
+  }; */
 
   const addStockHandler = () => {
-    let localStocks: any = localStorage.getItem('stocks');
-
-    if (JSON.parse(localStocks).length === 0) {
-      setStocks([{ code: stockCode, months }]);
-      setStockCode('');
-      setMonths(0);
+    const temp = stocks ? [...stocks!, { code: stockCode, months }] : [{ code: stockCode, months }];
       window.localStorage.setItem(
-        'stocks',
-        JSON.stringify([{ code: stockCode, months }])
-      );
-      return;
-    }
-    //only storing one stock to limit API calls
-    const temp = [...stocks!, { code: stockCode, months }];
+      'stocks',
+      JSON.stringify(temp)
+    );
+    setIsLoading(true);
     setStocks(temp);
-    setStockCode('');
-    setMonths(0);
+    setStockCode(DEFAULT_STOCK);
+    setMonths(DEFAULT_MONTHS);
+
+    setTimeout(() => {
+        setIsLoading(false)
+      }, 1000)
   };
 
-  const deleteStockHandler = (stock: string) => {
+  const deleteStockHandler = (stockCode: string) => {
+    let temp = null;
     if (stocks!.length === 1) {
-      setStocks(null);
+      temp = null;
     }
-    const temp = stocks!.filter((stockObject) => {
-      return stockObject.code !== stock;
-    });
+    if (stocks!.length > 1) {
+      temp = stocks!.filter((stockObject) => stockObject.code !== stockCode)
+    }
     setStocks(temp);
     window.localStorage.setItem('stocks', JSON.stringify(temp));
+    
+
   };
+
+    const memoList = useMemo(()=> stocks?.map((stock, index) => {
+              return (
+                <StockContainer
+                  key={index}
+                  code={stock.code}
+                  deleteHandler={deleteStockHandler}
+                >
+                  <ChartData stock={stock.code} months={stock.months} />
+                </StockContainer>
+              );
+            }), [stocks])
 
   if (isLoading) {
     return (
@@ -91,29 +109,11 @@ export default function Stocks({ currentUser }: any) {
     return (
       <Fragment>
         <PageContainer>
-          {stocks &&
-            stocks.map((stock, index) => {
-              return (
-                <StockContainer
-                  key={index}
-                  code={stock.code}
-                  deleteHandler={deleteStockHandler}
-                >
-                  <GetData stock={stock.code} months={stock.months} />
-                </StockContainer>
-              );
-            })}
+          {stocks && memoList }
 
-          {!isLoading && (!stocks || stocks.length < 5) && (
+          {!isLoading && (!stocks || stocks.length < 6) && (
             <SquareContainer>
-              <Input
-                name={'Stock Code:'}
-                label={'stockcode'}
-                type={'text'}
-                placeholder={'Stock Code'}
-                getInputs={getStockCode}
-                value={stockCode}
-              />
+              <StockDropdown code={stockCode} getStock={getStockCode} />
               <Input
                 name={'Months'}
                 label={'months'}

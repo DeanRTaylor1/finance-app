@@ -35,7 +35,7 @@ export default function ChartData({ stock, months }: any) {
   const getData = async (code: string) => {
     try {
       const response = await axios.get(
-        `https://www.alphavantage.co/query?function=TIME_SERIES_MONTHLY&symbol=${code}&apikey=${process.env.NEXT_PUBLIC_ALPHA_VANTAGE_API_KEY}`
+        `${process.env.NEXT_PUBLIC_API_URL}api/finances/stocks/${code}`, { withCredentials: true }
       );
       const data = await response.data;
       const stockDetails = data['Meta Data'];
@@ -44,19 +44,22 @@ export default function ChartData({ stock, months }: any) {
       setFinalDates(dates);
       setDetails(stockDetails);
       setfinalStockData(stockData);
-      setIsLoading(false);
+      console.log(code, data)
     } catch (err) {
       console.log(err);
     }
   };
 
   useEffect(() => {
+    console.log(stock, months)
     getData(stock);
-  }, []);
+    const timer = setTimeout(() => {
+      setIsLoading(false);
 
-  useEffect(() => {
-    //console.log(details, finalDates, finalStockData);
-  }, [details, finalDates, finalStockData]);
+    }, 750)
+
+    return () => clearTimeout(timer)
+  }, [stock, months]);
 
   return (
     <Fragment>

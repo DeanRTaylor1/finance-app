@@ -39,7 +39,7 @@ const DashboardPage: React.FC<any> = ({ currentUser }) => {
         withCredentials: true,
       }
     );
-    console.log(response.data);
+    //console.log(response.data);
     if (response.data.monthlySalary === 0) {
       return Router.push('/user/profile');
     }
@@ -86,19 +86,8 @@ const DashboardPage: React.FC<any> = ({ currentUser }) => {
 
   const savingsItems = [
     userData && {
-      title: 'Target Weekly Savings',
-      value: `${getCurrencySymbol(userData.currency)}${numberWithCommas(
-        getWeeklySavings(
-          userData.monthlySalary,
-          userData.totalOutgoings,
-          userData.savingsRate
-        )
-      )}`,
-    },
-    userData && {
-      title: `Days until ${getCurrencySymbol(userData.currency)}${
-        userData.savingsTarget
-      }`,
+      title: `Days until ${getCurrencySymbol(userData.currency)}${userData.savingsTarget
+        }`,
       value: `${numberWithCommas(
         daysUntilTarget(
           +userData.monthlySalary,
@@ -106,6 +95,16 @@ const DashboardPage: React.FC<any> = ({ currentUser }) => {
           +userData.savingsRate,
           +userData.savingsTarget,
           +userData.currentSavings
+        )
+      )}`,
+    },
+    userData && {
+      title: 'Target Weekly Savings',
+      value: `${getCurrencySymbol(userData.currency)}${numberWithCommas(
+        getWeeklySavings(
+          userData.monthlySalary,
+          userData.totalOutgoings,
+          userData.savingsRate
         )
       )}`,
     },

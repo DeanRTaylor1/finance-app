@@ -16,6 +16,10 @@ const DoRequest = ({ url, method, body, onSuccess }: useRequest) => {
       }
       return response.data;
     } catch (err: any) {
+      //console.log(err.response.status === 429)
+      if(err.response.status === 429){
+         return setErrors(['Too many requests, please try again later'])
+        }
       setErrors(err.response.data.errors.map((err: any) => err.message));
     }
   };

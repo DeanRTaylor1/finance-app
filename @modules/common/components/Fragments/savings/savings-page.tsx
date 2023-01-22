@@ -39,7 +39,7 @@ const SavingsPage: React.FC<PropsWithAuth> = ({ currentUser }) => {
         withCredentials: true,
       }
     );
-    console.log(response.data);
+    //console.log(response.data);
     if (response.data.monthlySalary === 0) {
       return Router.push('/user/profile');
     }
